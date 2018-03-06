@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "jasmine": "^3.1.0",
+    "jest-cli": "^22.4.2",
     "jquery": "^1.9.1",
     "npm": "^5.7.1",
     "react": "^16.2.0",
@@ -11,7 +13,12 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
-    "superagent": "^3.8.2"
+    "superagent": "^3.8.2",
+    "@types/enzyme": "^3.1.9",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/react-test-renderer": "^16.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -20,12 +27,12 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "enzyme": "^3.3.0",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
-    "jest": "^22.4.2"
+    "jest": "^22.4.2",
+    "react-test-renderer": "^16.2.0"
   }
 }
