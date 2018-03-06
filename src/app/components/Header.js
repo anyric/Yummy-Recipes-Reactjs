@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
 
 import '../static/css/w3.css';
+import logo from '../static/img/logo.jpg';
 import { UserProfile } from './UserProfile';
 import { ResetPassword } from './ResetPassword';
 import { AddCategory } from './AddCategory';
@@ -27,7 +28,10 @@ export class Header extends Component {
         <div className="m-0">
           <div className="row mb-5">
             <div className="bg-info w3-bar m-0 pb-2">
-              <span className="name p-5"> Yummy Recipes</span>
+              <span className="name p-5">
+                <img className="img-thumbnail logo mr-3 ml-2 bg-warning" src={logo} alt="logo" />
+              Yummy Recipes
+              </span>
             </div>
             <nav className="w3-bar navbar-expand-lg navbar-dark bg-dark ">
               <div className="w3-bar m-0 text-center">
@@ -79,20 +83,13 @@ export class Header extends Component {
             <div className="col-sm-2 col-md-2 hidden-xs-down ml-5 mt-5 bg-faded sidebar bg-info">
               <ul className="nav flex-column nav-stacked" role="presentation">
                 <li className="nav-item">
-                  <a
-                    className="glyphicon glyphicon-menu-hamburger text-white nav-link btn bg-info"
-                    href="#/"
-                  >
-                    <strong> Overview</strong>
-                  </a>
+                  <span className="text-white nav-link btn bg-info">
+                    <strong> <h3 className="glyphicon glyphicon-menu-hamburger disabled" > Menu</h3>
+                    </strong>
+                  </span>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className="nav-link text-white bg-dark"
-                    data-toggle="collapse"
-                    href="#user"
-                  >User
-                  </a>
+                  <span className="nav-link text-white bg-dark">User</span>
                   <div id="user" className="panel-collapse">
                     <ul className="list-group">
                       <li className="list-group-item">
@@ -121,12 +118,7 @@ export class Header extends Component {
                   </div>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className="nav-link text-white bg-dark"
-                    data-toggle="collapse"
-                    href="#cat"
-                  >Category
-                  </a>
+                  <span className="nav-link text-white bg-dark">Category</span>
                   <div id="cat" className="panel-collapse">
                     <ul className="list-group">
                       <li className="list-group-item">
@@ -149,12 +141,7 @@ export class Header extends Component {
                   </div>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className="nav-link text-white bg-dark"
-                    data-toggle="collapse"
-                    href="#recipe"
-                  >Recipe
-                  </a>
+                  <span className="nav-link text-white bg-dark">Recipe</span>
                   <div id="recipe" className="panel-collapse">
                     <ul className="list-group">
                       <li className="list-group-item">

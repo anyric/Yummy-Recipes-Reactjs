@@ -11,6 +11,17 @@
     cursor: pointer;
     color: #fff;
     }
+    .logo{
+        width: 55px;
+        height: 55px;
+        border-radius: 30px;
+
+    }
+    .profile{
+        width: 180px;
+        float: left;
+        margin-right: 20px;
+    }
     .name {
     text-shadow: 2px 3px 3px #292929;
     font-family: "Open Sans Bold", Arial, Helvetica, sans-serif;
