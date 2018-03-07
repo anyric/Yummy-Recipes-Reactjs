@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1520346576594" clover="3.2.0">
-  <project timestamp="1520346576595" name="All files">
-    <metrics statements="311" coveredstatements="5" conditionals="233" coveredconditionals="0" methods="107" coveredmethods="2" elements="651" coveredelements="7" complexity="0" loc="311" ncloc="311" packages="3" files="20" classes="20">
+<coverage generated="1520367913820" clover="3.2.0">
+  <project timestamp="1520367913820" name="All files">
+    <metrics statements="262" coveredstatements="14" conditionals="133" coveredconditionals="0" methods="89" coveredmethods="8" elements="484" coveredelements="22" complexity="0" loc="262" ncloc="262" packages="3" files="20" classes="20">
       <package name="src">
         <metrics statements="10" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <file name="index.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/index.js">
@@ -18,11 +18,11 @@
         </file>
         <file name="setupTests.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/setupTests.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="5" count="2" type="stmt"/>
+          <line num="5" count="8" type="stmt"/>
         </file>
       </package>
       <package name="src.app.components">
-        <metrics statements="153" coveredstatements="2" conditionals="176" coveredconditionals="0" methods="63" coveredmethods="2"/>
+        <metrics statements="104" coveredstatements="11" conditionals="76" coveredconditionals="0" methods="45" coveredmethods="8"/>
         <file name="Aboutus.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/Aboutus.js">
           <metrics statements="3" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="1" count="0" type="cond" truecount="0" falsecount="4"/>
@@ -30,21 +30,16 @@
           <line num="10" count="0" type="stmt"/>
         </file>
         <file name="AddCategory.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/AddCategory.js">
-          <metrics statements="8" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="4" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="12"/>
+          <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="7" count="0" type="stmt"/>
           <line num="8" count="0" type="stmt"/>
           <line num="9" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
           <line num="15" count="0" type="stmt"/>
-          <line num="56" count="0" type="stmt"/>
         </file>
         <file name="AddRecipe.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/AddRecipe.js">
-          <metrics statements="13" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="6" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="12"/>
-          <line num="5" count="0" type="stmt"/>
+          <metrics statements="10" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+          <line num="5" count="2" type="stmt"/>
           <line num="9" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
           <line num="11" count="0" type="stmt"/>
@@ -54,12 +49,9 @@
           <line num="21" count="0" type="stmt"/>
           <line num="26" count="0" type="stmt"/>
           <line num="43" count="0" type="stmt"/>
-          <line num="80" count="0" type="stmt"/>
         </file>
         <file name="CategoryReport.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/CategoryReport.js">
-          <metrics statements="28" coveredstatements="0" conditionals="38" coveredconditionals="0" methods="11" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="12"/>
+          <metrics statements="25" coveredstatements="0" conditionals="26" coveredconditionals="0" methods="9" coveredmethods="0"/>
           <line num="7" count="0" type="stmt"/>
           <line num="8" count="0" type="stmt"/>
           <line num="9" count="0" type="stmt"/>
@@ -85,7 +77,6 @@
           <line num="56" count="0" type="stmt"/>
           <line num="67" count="0" type="stmt"/>
           <line num="99" count="0" type="stmt"/>
-          <line num="243" count="0" type="stmt"/>
         </file>
         <file name="Contacts.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/Contacts.js">
           <metrics statements="3" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -94,28 +85,18 @@
           <line num="10" count="0" type="stmt"/>
         </file>
         <file name="Dashboard.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/Dashboard.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="20" count="0" type="stmt"/>
+          <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="7" count="2" type="stmt"/>
         </file>
         <file name="DashboardWelcome.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/DashboardWelcome.js">
-          <metrics statements="4" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="4"/>
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
           <line num="7" count="0" type="stmt"/>
-          <line num="19" count="0" type="stmt"/>
         </file>
         <file name="DeleteAccount.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/DeleteAccount.js">
-          <metrics statements="7" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="4" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="stmt"/>
-          <line num="5" count="0" type="cond" truecount="0" falsecount="12"/>
+          <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
           <line num="9" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
           <line num="15" count="0" type="stmt"/>
-          <line num="34" count="0" type="stmt"/>
         </file>
         <file name="EditCategory.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/EditCategory.js">
           <metrics statements="3" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -124,32 +105,18 @@
           <line num="28" count="0" type="stmt"/>
         </file>
         <file name="Footer.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/Footer.js">
-          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-          <line num="5" count="0" type="stmt"/>
+          <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="5" count="2" type="stmt"/>
         </file>
         <file name="Header.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/Header.js">
-          <metrics statements="21" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="stmt"/>
-          <line num="7" count="0" type="stmt"/>
-          <line num="8" count="0" type="stmt"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="12" count="0" type="stmt"/>
-          <line num="13" count="0" type="stmt"/>
-          <line num="14" count="0" type="cond" truecount="0" falsecount="12"/>
-          <line num="18" count="0" type="stmt"/>
-          <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="20" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
+          <metrics statements="7" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="19" count="2" type="stmt"/>
+          <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="21" count="0" type="stmt"/>
           <line num="23" count="0" type="stmt"/>
           <line num="24" count="0" type="stmt"/>
           <line num="25" count="0" type="stmt"/>
-          <line num="195" count="0" type="stmt"/>
+          <line num="26" count="0" type="stmt"/>
         </file>
         <file name="Home.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/Home.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -160,9 +127,7 @@
           <line num="11" count="2" type="stmt"/>
         </file>
         <file name="RecipeReport.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/RecipeReport.js">
-          <metrics statements="25" coveredstatements="0" conditionals="40" coveredconditionals="0" methods="11" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="12"/>
+          <metrics statements="22" coveredstatements="0" conditionals="28" coveredconditionals="0" methods="9" coveredmethods="0"/>
           <line num="7" count="0" type="stmt"/>
           <line num="8" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
@@ -185,13 +150,10 @@
           <line num="54" count="0" type="stmt"/>
           <line num="65" count="0" type="stmt"/>
           <line num="98" count="0" type="stmt"/>
-          <line num="242" count="0" type="stmt"/>
         </file>
         <file name="ResetPassword.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/ResetPassword.js">
-          <metrics statements="17" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="5" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="3" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="5" count="0" type="stmt"/>
+          <metrics statements="14" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="1"/>
+          <line num="5" count="3" type="stmt"/>
           <line num="9" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
           <line num="11" count="0" type="stmt"/>
@@ -204,36 +166,25 @@
           <line num="24" count="0" type="stmt"/>
           <line num="26" count="0" type="stmt"/>
           <line num="27" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="68" count="0" type="stmt"/>
+          <line num="30" count="2" type="stmt"/>
         </file>
         <file name="Signup.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/Signup.js">
-          <metrics statements="7" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="2" count="0" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="6" count="0" type="cond" truecount="0" falsecount="12"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="116" count="0" type="stmt"/>
+          <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="10" count="2" type="stmt"/>
         </file>
         <file name="UserProfile.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/components/UserProfile.js">
-          <metrics statements="7" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
-          <line num="1" count="0" type="stmt"/>
-          <line num="4" count="0" type="stmt"/>
-          <line num="5" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="9" count="0" type="stmt"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="28" count="0" type="stmt"/>
+          <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+          <line num="8" count="2" type="stmt"/>
+          <line num="9" count="2" type="stmt"/>
+          <line num="14" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.app.utils">
         <metrics statements="148" coveredstatements="2" conditionals="53" coveredconditionals="0" methods="42" coveredmethods="0"/>
         <file name="Utility.js" path="/Users/richard/Desktop/cp4/Yummy-Recipes-Reactjs/src/app/utils/Utility.js">
           <metrics statements="148" coveredstatements="2" conditionals="53" coveredconditionals="0" methods="42" coveredmethods="0"/>
-          <line num="3" count="1" type="stmt"/>
-          <line num="4" count="1" type="stmt"/>
+          <line num="3" count="4" type="stmt"/>
+          <line num="4" count="4" type="stmt"/>
           <line num="8" count="0" type="stmt"/>
           <line num="9" count="0" type="stmt"/>
           <line num="10" count="0" type="stmt"/>
