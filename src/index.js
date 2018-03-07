@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { Home } from './app/components/Home';
-import { Signup } from './app/components/Signup';
-import { Login } from './app/components/Login';
-import { Dashboard } from './app/components/Dashboard';
+import { Home } from './app/components/home/Home';
+import { Signup } from './app/components/user/Signup';
+import { Login } from './app/components/user/Login';
+import { Dashboard } from './app/components/home/Dashboard';
 
 class App extends Component {
   render() {

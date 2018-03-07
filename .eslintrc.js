@@ -34,5 +34,6 @@ module.exports = {
         "arrow-body-style":0,
         "no-plusplus":0,
         "no-console":0,
+        "react/sort-comp":0,
     }
 };
