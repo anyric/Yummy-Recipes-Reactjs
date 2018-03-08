@@ -13,9 +13,8 @@ import { AddRecipe } from '../recipes/AddRecipe';
 import { RecipeReport } from '../recipes/RecipeReport';
 import { Footer } from './Footer';
 import * as User from '../../controller/User';
-import * as Category from '../../controller/Category';
-import * as Recipes from '../../controller/Recipes';
-
+// import * as Category from '../../controller/Category';
+// import * as Recipes from '../../controller/Recipes';
 
 export class Header extends Component {
   render() {
@@ -23,9 +22,6 @@ export class Header extends Component {
     if (!localStorage.isauth) {
       window.location.assign('/login');
     }
-    User.getUser();
-    Category.getCategory(null);
-    Recipes.getRecipe(null);
     return (
       <BrowserRouter>
         <div className="m-0">
@@ -98,7 +94,6 @@ export class Header extends Component {
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          onClick={User.getUser.bind(this)}
                           to="/dashboard/profile"
                         >
                           <span><i className="glyphicon glyphicon-user"></i> View profile</span>
@@ -132,7 +127,6 @@ export class Header extends Component {
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          onClick={Category.getCategory.bind(this)}
                           to="/dashboard/categoryreport"
                         >
                           <span> <i className="glyphicon glyphicon-folder-open"></i> View Reports
@@ -155,7 +149,6 @@ export class Header extends Component {
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          onClick={Recipes.getRecipe.bind(this)}
                           to="/dashboard/recipereport"
                         >
                           <span><i className="glyphicon glyphicon-folder-open"></i> View Reports

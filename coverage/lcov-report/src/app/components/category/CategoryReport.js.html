@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">5.26% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/25</span>
+        <span class='fraction'>2/38</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/26</span>
+        <span class='fraction'>0/34</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/9</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">5.26% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/25</span>
+        <span class='fraction'>2/38</span>
       </div>
     </div>
   </div>
@@ -287,9 +287,53 @@
 242
 243
 244
-245</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -309,6 +353,41 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -334,7 +413,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -533,25 +611,65 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { Component } from 'react';
 &nbsp;
+import axios from 'axios';
+&nbsp;
 import * as Category from '../../controller/Category';
+&nbsp;
+const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
+axios.defaults.headers = { 'Content-Type': 'application/json' };
 &nbsp;
 export class CategoryReport extends Component {
 <span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
 <span class="cstat-no" title="statement not covered" >    super(props);</span>
-    const paginate = <span class="cstat-no" title="statement not covered" >JSON.parse(localStorage.getItem('pagination'));</span>
+<span class="cstat-no" title="statement not covered" >    this.getCategory(null);</span>
 <span class="cstat-no" title="statement not covered" >    this.state = {</span>
-      categorylist: JSON.parse(localStorage.getItem('category')),
+      categorylist: [],
       search: '',
-      items: paginate.items,
-      currentPage: paginate.page,
-      pages: paginate.pages,
-      nextPage: paginate.next,
-      previousPage: paginate.previous,
+      items: 0,
+      currentPage: 1,
+      pages: 0,
+      nextPage: null,
+      previousPage: null,
     };
+  }
+<span class="fstat-no" title="function not covered" >  ge</span>tCategory(page) {
+    const config = <span class="cstat-no" title="statement not covered" >{ headers: { 'x-access-token': localStorage.getItem('token') } };</span>
+    let pageURL = <span class="cstat-no" title="statement not covered" >'';</span>
+<span class="cstat-no" title="statement not covered" >    if (page === null) {</span>
+<span class="cstat-no" title="statement not covered" >      pageURL = `${url}category/`;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof page === 'number' &amp;&amp; page &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      pageURL = `${url}category/?page=${page}`;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      pageURL = page;</span>
+    }
+    const self = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >    axios.get(pageURL, config)</span>
+      .then(<span class="fstat-no" title="function not covered" >fu</span>nction (res) {
+<span class="cstat-no" title="statement not covered" >        self.setState({</span>
+          categorylist: res.data.category.results,
+          items: res.data.category.items,
+          currentPage: res.data.category.currentPage,
+          pages: res.data.category.pages,
+          nextPage: res.data.category.next,
+          previousPage: res.data.category.previous,
+        });
+      })
+      .catch(<span class="fstat-no" title="function not covered" >fu</span>nction (error) {
+<span class="cstat-no" title="statement not covered" >        if (error.response) {</span>
+<span class="cstat-no" title="statement not covered" >          self.setState({</span>
+            items: 0,
+            currentPage: 0,
+            pages: 0,
+            nextPage: null,
+            previousPage: null,
+            message: error.response.data.message,
+          });
+        }
+      });
   }
 <span class="fstat-no" title="function not covered" >  ha</span>ndleSearchInput(event) {
     const value = <span class="cstat-no" title="statement not covered" >event.target.value;</span>
-<span class="cstat-no" title="statement not covered" >    Category.getCategory(event);</span>
+<span class="cstat-no" title="statement not covered" >    this.getCategory(null);</span>
 <span class="cstat-no" title="statement not covered" >    this.setState({</span>
       search: value,
     });
@@ -575,10 +693,9 @@ export class CategoryReport extends Component {
 <span class="cstat-no" title="statement not covered" >    if (page &gt; this.state.pages) {</span>
 <span class="cstat-no" title="statement not covered" >      page = this.state.pages;</span>
     }
-<span class="cstat-no" title="statement not covered" >    Category.getCategory(page);</span>
+<span class="cstat-no" title="statement not covered" >    this.getCategory(page);</span>
   }
 <span class="fstat-no" title="function not covered" >  re</span>nder() {
-    const message = <span class="cstat-no" title="statement not covered" >JSON.parse(localStorage.getItem('catmessage'));</span>
     const filteredCategoryList = <span class="cstat-no" title="statement not covered" >this.state.categorylist ? (this.state.categorylist.filter(</span>
 <span class="fstat-no" title="function not covered" >      (c</span>ategory) =&gt; {
 <span class="cstat-no" title="statement not covered" >        return category.name.indexOf(this.state.search.toLowerCase()) !== -1;</span>
@@ -589,9 +706,9 @@ export class CategoryReport extends Component {
 <span class="cstat-no" title="statement not covered" >        pageListElements.push(</span>
           &lt;li key={i} className={this.state.currentPage === i ? 'active' : ''}&gt;
             &lt;a
-              onSelect={this.handlePageChange.bind(this, i)}
+              onClick={this.handlePageChange.bind(this, i)}
               href={this.state.currentPage ? '/dashboard/categoryreport' : '#'}
-            &gt;{i }
+            &gt;{i}
             &lt;/a&gt;
           &lt;/li&gt;,
         );
@@ -745,7 +862,7 @@ export class CategoryReport extends Component {
                       className={this.state.currentPage === 1 ? 'disabled' : ''}
                     &gt;
                       &lt;a
-                        onSelect={Category.getCategory(this.state.currentPage - 1)}
+                        onClick={this.getCategory(this.state.currentPage - 1)}
                         href={this.state.previousPage ? '/dashboard/categoryreport' : '#'}
                         aria-label="Previous"
                       &gt;
@@ -754,10 +871,10 @@ export class CategoryReport extends Component {
                     &lt;/li&gt;
                     {pageListElements}
                     &lt;li
-                      className={this.state.currentPage === this.state.pages ? 'disabled bg.seconday' : ''}
+                      className={this.state.currentPage === this.state.pages ? 'disabled' : ''}
                     &gt;
                       &lt;a
-                        onSelect={Category.getCategory(
+                        onClick={this.getCategory(
                         (this.state.currentPage + 1) &gt; this.state.pages
                         ? this.state.pages : this.state.currentPage + 1)}
                         href={this.state.nextPage ? '/dashboard/categoryreport' : '#'}
@@ -770,7 +887,7 @@ export class CategoryReport extends Component {
                 &lt;/nav&gt;
               &lt;/ul&gt;
             &lt;/div&gt;
-          &lt;/div&gt; : &lt;p className="text-center"&gt;{message}&lt;/p&gt;}
+          &lt;/div&gt; : &lt;p className="text-center"&gt;{this.state.message}&lt;/p&gt;}
       &lt;/div&gt;
     );
   }
@@ -781,7 +898,7 @@ export class CategoryReport extends Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 08 2018 01:03:16 GMT+0300 (EAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 08 2018 21:51:54 GMT+0300 (EAT)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

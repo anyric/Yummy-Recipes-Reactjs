@@ -1,22 +1,62 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 import * as Recipes from '../../controller/Recipes';
+
+const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
+axios.defaults.headers = { 'Content-Type': 'application/json' };
 
 export class RecipeReport extends Component {
   constructor(props) {
     super(props);
-    const queryresults = JSON.parse(localStorage.getItem('paginate'));
+    this.getRecipe(null);
     this.state = {
-      recipelist: JSON.parse(localStorage.getItem('recipes')),
+      recipelist: [],
       search: '',
-      items: queryresults.items,
-      currentPage: queryresults.page,
-      pages: queryresults.pages,
-      nextPage: queryresults.next,
-      previousPage: queryresults.previous };
+      items: 0,
+      currentPage: 1,
+      pages: 0,
+      nextPage: null,
+      previousPage: null,
+      message: '' };
+  }
+  getRecipe(page) {
+    const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
+    let pageURL = '';
+    if (typeof page === 'number' && page > 0) {
+      pageURL = `${url}category/recipes/?page=${page}`;
+    } else {
+      pageURL = `${url}category/recipes/`;
+    }
+    const self = this;
+    axios.get(pageURL, config)
+      .then(function (res) {
+        self.setState({
+          recipelist: res.data.recipe.results,
+          items: res.data.recipe.items,
+          currentPage: res.data.recipe.currentPage,
+          pages: res.data.recipe.pages,
+          nextPage: res.data.recipe.next,
+          previousPage: res.data.recipe.previous,
+        });
+      })
+      .catch(function (error) {
+        if (error.response) {
+          self.setState({
+            items: 0,
+            currentPage: 1,
+            pages: 0,
+            nextPage: null,
+            previousPage: null,
+            message: error.response.data.message,
+          });
+        }
+      });
   }
   handleSearchInput(event) {
     const value = event.target.value;
+    this.getRecipe(null);
     this.setState({
       search: value,
     });
@@ -31,18 +71,16 @@ export class RecipeReport extends Component {
       }),
     });
   }
-  handleAlert() {
-    alert(this.state.search);
+  handleSearch() {
     this.setState({
       search: '',
     });
   }
   handlePageChange(event, page) {
     event.preventDefault();
-    Recipes.getRecipe(page);
+    this.getRecipe(page);
   }
   render() {
-    const message = JSON.parse(localStorage.getItem('recipemessage'));
     const filteredrecipelist = this.state.recipelist ? (this.state.recipelist.filter(
       (recipe) => {
         return recipe.name.indexOf(this.state.search.toLowerCase()) !== -1;
@@ -81,7 +119,7 @@ export class RecipeReport extends Component {
                   <div
                     className="input-group-addon"
                     role="button"
-                    onClick={this.handleAlert.bind(this)}
+                    onClick={this.handleSearch.bind(this)}
                     tabIndex={0}
                   >
                     <span className="glyphicon glyphicon-search"></span>
@@ -212,7 +250,7 @@ export class RecipeReport extends Component {
                       className={this.state.currentPage === 1 ? 'disabled' : ''}
                     >
                       <a
-                        onSelect={Recipes.getRecipe(this.state.currentPage - 1)}
+                        onSelect={this.getRecipe(this.state.currentPage - 1)}
                         href={this.state.previousPage ? '/dashboard/recipereport' : '#'}
                         aria-label="Previous"
                       >
@@ -224,7 +262,7 @@ export class RecipeReport extends Component {
                       className={this.state.currentPage === this.state.pages ? 'disabled' : ''}
                     >
                       <a
-                        onSelect={Recipes.getRecipe((this.state.currentPage + 1) > this.state.pages
+                        onSelect={this.getRecipe((this.state.currentPage + 1) > this.state.pages
                         ? this.state.pages : this.state.currentPage + 1)}
                         href={this.state.nextPage ? '/dashboard/recipereport' : '#'}
                         aria-label="Next"
@@ -235,7 +273,7 @@ export class RecipeReport extends Component {
                   </ul>
                 </nav> : ''}
             </ul>
-          </div> : <p className="text-center">{message}</p>}
+          </div> : <p className="text-center">{this.state.message}</p>}
       </div>
     );
   }

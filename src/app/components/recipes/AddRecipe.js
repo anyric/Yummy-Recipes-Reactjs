@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 import * as Recipes from '../../controller/Recipes';
-import * as Category from '../../controller/Category';
 
 const url = 'http://127.0.0.1:5000/recipe/api/v1.0/allcategory/';
+axios.defaults.headers = { 'Content-Type': 'application/json' };
 
 export class AddRecipe extends Component {
-  constructor(props) {
-    super(props);
-    Category.getCategory(url);
-    this.state = {
-      categorylist: JSON.parse(localStorage.getItem('allcategory')),
-    };
+  constructor() {
+    super();
+    this.getCategory();
+    this.state = { categorylist: [] };
   }
-
+  getCategory() {
+    const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
+    const self = this;
+    axios.get(url, config)
+      .then(function (res) {
+        self.setState({ categorylist: res.data });
+      })
+      .catch(function (error) {
+        if (error.response) {
+          alert(error.response.data.message);
+        }
+      });
+  }
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;

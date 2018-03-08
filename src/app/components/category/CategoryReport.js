@@ -1,24 +1,64 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 import * as Category from '../../controller/Category';
+
+const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
+axios.defaults.headers = { 'Content-Type': 'application/json' };
 
 export class CategoryReport extends Component {
   constructor(props) {
     super(props);
-    const paginate = JSON.parse(localStorage.getItem('pagination'));
+    this.getCategory(null);
     this.state = {
-      categorylist: JSON.parse(localStorage.getItem('category')),
+      categorylist: [],
       search: '',
-      items: paginate.items,
-      currentPage: paginate.page,
-      pages: paginate.pages,
-      nextPage: paginate.next,
-      previousPage: paginate.previous,
+      items: 0,
+      currentPage: 1,
+      pages: 0,
+      nextPage: null,
+      previousPage: null,
     };
+  }
+  getCategory(page) {
+    const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
+    let pageURL = '';
+    if (page === null) {
+      pageURL = `${url}category/`;
+    } else if (typeof page === 'number' && page > 0) {
+      pageURL = `${url}category/?page=${page}`;
+    } else {
+      pageURL = page;
+    }
+    const self = this;
+    axios.get(pageURL, config)
+      .then(function (res) {
+        self.setState({
+          categorylist: res.data.category.results,
+          items: res.data.category.items,
+          currentPage: res.data.category.currentPage,
+          pages: res.data.category.pages,
+          nextPage: res.data.category.next,
+          previousPage: res.data.category.previous,
+        });
+      })
+      .catch(function (error) {
+        if (error.response) {
+          self.setState({
+            items: 0,
+            currentPage: 0,
+            pages: 0,
+            nextPage: null,
+            previousPage: null,
+            message: error.response.data.message,
+          });
+        }
+      });
   }
   handleSearchInput(event) {
     const value = event.target.value;
-    Category.getCategory(event);
+    this.getCategory(null);
     this.setState({
       search: value,
     });
@@ -42,10 +82,9 @@ export class CategoryReport extends Component {
     if (page > this.state.pages) {
       page = this.state.pages;
     }
-    Category.getCategory(page);
+    this.getCategory(page);
   }
   render() {
-    const message = JSON.parse(localStorage.getItem('catmessage'));
     const filteredCategoryList = this.state.categorylist ? (this.state.categorylist.filter(
       (category) => {
         return category.name.indexOf(this.state.search.toLowerCase()) !== -1;
@@ -56,9 +95,9 @@ export class CategoryReport extends Component {
         pageListElements.push(
           <li key={i} className={this.state.currentPage === i ? 'active' : ''}>
             <a
-              onSelect={this.handlePageChange.bind(this, i)}
+              onClick={this.handlePageChange.bind(this, i)}
               href={this.state.currentPage ? '/dashboard/categoryreport' : '#'}
-            >{i }
+            >{i}
             </a>
           </li>,
         );
@@ -212,7 +251,7 @@ export class CategoryReport extends Component {
                       className={this.state.currentPage === 1 ? 'disabled' : ''}
                     >
                       <a
-                        onSelect={Category.getCategory(this.state.currentPage - 1)}
+                        onClick={this.getCategory(this.state.currentPage - 1)}
                         href={this.state.previousPage ? '/dashboard/categoryreport' : '#'}
                         aria-label="Previous"
                       >
@@ -221,10 +260,10 @@ export class CategoryReport extends Component {
                     </li>
                     {pageListElements}
                     <li
-                      className={this.state.currentPage === this.state.pages ? 'disabled bg.seconday' : ''}
+                      className={this.state.currentPage === this.state.pages ? 'disabled' : ''}
                     >
                       <a
-                        onSelect={Category.getCategory(
+                        onClick={this.getCategory(
                         (this.state.currentPage + 1) > this.state.pages
                         ? this.state.pages : this.state.currentPage + 1)}
                         href={this.state.nextPage ? '/dashboard/categoryreport' : '#'}
@@ -237,7 +276,7 @@ export class CategoryReport extends Component {
                 </nav>
               </ul>
             </div>
-          </div> : <p className="text-center">{message}</p>}
+          </div> : <p className="text-center">{this.state.message}</p>}
       </div>
     );
   }
