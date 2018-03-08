@@ -19,6 +19,7 @@ export class CategoryReport extends Component {
       pages: 0,
       nextPage: null,
       previousPage: null,
+      message: '',
     };
   }
   getCategory(page) {
@@ -57,11 +58,10 @@ export class CategoryReport extends Component {
       });
   }
   handleSearchInput(event) {
+    event.preventDefault();
     const value = event.target.value;
     this.getCategory(null);
-    this.setState({
-      search: value,
-    });
+    this.setState({ search: value });
   }
   handleRemoveCategory(index, id) {
     if (id > 0) {
@@ -73,12 +73,9 @@ export class CategoryReport extends Component {
     this.setState({ categorylist: deletedCategory });
   }
   handleSearch() {
-    this.setState({
-      search: '',
-    });
+    this.setState({ search: '' });
   }
-  handlePageChange(event, page) {
-    event.preventDefault();
+  handlePageChange(page) {
     if (page > this.state.pages) {
       page = this.state.pages;
     }

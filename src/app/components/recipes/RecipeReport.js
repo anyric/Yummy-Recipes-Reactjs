@@ -10,7 +10,7 @@ axios.defaults.headers = { 'Content-Type': 'application/json' };
 export class RecipeReport extends Component {
   constructor(props) {
     super(props);
-    this.getRecipe(null);
+    this.getRecipes(null);
     this.state = {
       recipelist: [],
       search: '',
@@ -21,13 +21,15 @@ export class RecipeReport extends Component {
       previousPage: null,
       message: '' };
   }
-  getRecipe(page) {
+  getRecipes(page) {
     const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
     let pageURL = '';
-    if (typeof page === 'number' && page > 0) {
+    if (page === null) {
+      pageURL = `${url}category/recipes/`;
+    } else if (typeof page === 'number' && page > 0) {
       pageURL = `${url}category/recipes/?page=${page}`;
     } else {
-      pageURL = `${url}category/recipes/`;
+      pageURL = page;
     }
     const self = this;
     axios.get(pageURL, config)
@@ -45,7 +47,7 @@ export class RecipeReport extends Component {
         if (error.response) {
           self.setState({
             items: 0,
-            currentPage: 1,
+            currentPage: 0,
             pages: 0,
             nextPage: null,
             previousPage: null,
@@ -55,30 +57,28 @@ export class RecipeReport extends Component {
       });
   }
   handleSearchInput(event) {
+    event.preventDefault();
     const value = event.target.value;
-    this.getRecipe(null);
-    this.setState({
-      search: value,
-    });
+    this.getRecipes(null);
+    this.setState({ search: value });
   }
   handleRemoveRecipe(index, id) {
     if (id > 0) {
       Recipes.deleteRecipe(id);
     }
-    this.setState({
-      recipelist: this.state.recipelist.filter(function (e, i) {
-        return i !== index;
-      }),
+    const deletedRecipe = this.state.recipelist.filter(function (e, i) {
+      return i !== index;
     });
+    this.setState({ recipelist: deletedRecipe });
   }
   handleSearch() {
-    this.setState({
-      search: '',
-    });
+    this.setState({ search: '' });
   }
-  handlePageChange(event, page) {
-    event.preventDefault();
-    this.getRecipe(page);
+  handlePageChange(page) {
+    if (page > this.state.pages) {
+      page = this.state.pages;
+    }
+    this.getRecipes(page);
   }
   render() {
     const filteredrecipelist = this.state.recipelist ? (this.state.recipelist.filter(
@@ -91,7 +91,7 @@ export class RecipeReport extends Component {
         pageListElements.push(
           <li key={i} className={this.state.currentPage === i ? 'active' : ''}>
             <a
-              onSelect={this.handlePageChange.bind(this, i)}
+              onClick={this.handlePageChange.bind(this, i)}
               href={this.state.currentPage ? '/dashboard/recipereport' : '#'}
             >{i }
             </a>
@@ -250,7 +250,7 @@ export class RecipeReport extends Component {
                       className={this.state.currentPage === 1 ? 'disabled' : ''}
                     >
                       <a
-                        onSelect={this.getRecipe(this.state.currentPage - 1)}
+                        onClick={this.getRecipes(this.state.currentPage - 1)}
                         href={this.state.previousPage ? '/dashboard/recipereport' : '#'}
                         aria-label="Previous"
                       >
@@ -262,7 +262,7 @@ export class RecipeReport extends Component {
                       className={this.state.currentPage === this.state.pages ? 'disabled' : ''}
                     >
                       <a
-                        onSelect={this.getRecipe((this.state.currentPage + 1) > this.state.pages
+                        onClick={this.getRecipes((this.state.currentPage + 1) > this.state.pages
                         ? this.state.pages : this.state.currentPage + 1)}
                         href={this.state.nextPage ? '/dashboard/recipereport' : '#'}
                         aria-label="Next"

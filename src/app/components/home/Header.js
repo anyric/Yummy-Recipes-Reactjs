@@ -13,8 +13,6 @@ import { AddRecipe } from '../recipes/AddRecipe';
 import { RecipeReport } from '../recipes/RecipeReport';
 import { Footer } from './Footer';
 import * as User from '../../controller/User';
-// import * as Category from '../../controller/Category';
-// import * as Recipes from '../../controller/Recipes';
 
 export class Header extends Component {
   render() {
