@@ -43,26 +43,7 @@ export function updateRecipe(event) {
       alert(error.response.data.message);
     });
 }
-export function getRecipe(page) {
-  const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
-  let pageURL = '';
-  if (typeof page === 'number' && page > 0) {
-    pageURL = `${url}category/recipes/?page=${page}`;
-  } else {
-    pageURL = `${url}category/recipes/`;
-  }
-  axios.get(pageURL, config)
-    .then(function (res) {
-      localStorage.setItem('paginate', JSON.stringify(res.data.recipe));
-      localStorage.setItem('recipes', JSON.stringify(res.data.recipe.results));
-    })
-    .catch(function (error) {
-      if (error.response) {
-        const paginate = { items: 0, page: 0, pages: 0, next: null, previous: null };
-        localStorage.setItem('paginate', JSON.stringify(paginate));
-        localStorage.setItem('recipemessage', JSON.stringify(error.response.data.message));
-      }
-    });
+export function getRecipe() {
 }
 export function deleteRecipe(id) {
   const config = { headers: { 'x-access-token': localStorage.getItem('token') } };

@@ -15,6 +15,18 @@ export class Home extends Component {
       <div>
         <header className="w3-bar">
           <div id="pic" className="carousel slide p-0" data-ride="carousel">
+            <div className="carousel-caption caption-button">
+              <NavLink to="/signup">
+                <button className="button btn-primary mx-5 mb-5">
+                  <span className="glyphicon glyphicon-user"></span>{' '} Sign Up here!
+                </button>
+              </NavLink>
+              <NavLink to="/login">
+                <button className="button btn-primary mx-5 mb-5" >
+                  <span className="glyphicon glyphicon-log-in"></span> {' '} Login here!
+                </button>
+              </NavLink>
+            </div>
             <ol className="carousel-indicators pt-0 mt-0">
               <li data-target="#pic" data-slide-to="0" className="active"></li>
               <li data-target="#pic" data-slide-to="1"></li>
@@ -23,7 +35,7 @@ export class Home extends Component {
             <div className="carousel-inner">
               <div className="item active">
                 <img src={pic1} alt="Break Fast Menu" />
-                <div className="carousel-caption">
+                <div className="carousel-caption caption-center">
                   <h1 className="text-info">Break Fast!</h1>
                   <h3 className="text-primary">
                     Start your day off with a delicious break fast menu.
@@ -32,7 +44,7 @@ export class Home extends Component {
               </div>
               <div className="item">
                 <img src={pic2} alt="Lunch Menu" />
-                <div className="carousel-caption">
+                <div className="carousel-caption caption-center">
                   <h1 className="text-info">Lunch!</h1>
                   <h3 className="text-primary">
                     Planning for your Lunch?, it just got better with
@@ -42,9 +54,9 @@ export class Home extends Component {
               </div>
               <div className="item">
                 <img src={pic4} alt="Supper Menu" />
-                <div className="carousel-caption">
-                  <h1 className="text-dark">Supper!</h1>
-                  <h3 className="text-info">
+                <div className="carousel-caption caption-center">
+                  <h1 className="text-info">Supper!</h1>
+                  <h3 className="text-white">
                     Still filling full after a heavy lunch, worry no more! just grab
                     some tasty chips and a vegetable burgar for a wonderful night long
                     comfortable sleep.
@@ -76,25 +88,15 @@ export class Home extends Component {
                 <div className="col-md-6">
                   <span>
                     <p className="text-light pt-4 pb-0 my-5">Are you mindful of your
-                      <br /> health and diet? Just
+                      <br /> health and diet? Just signup!
                     </p>
-                    <NavLink to="/signup">
-                      <button className="button btn-primary mx-5 mb-5">
-                        <span className="glyphicon glyphicon-user"></span>{' '} Sign Up here!
-                      </button>
-                    </NavLink>
                   </span>
                 </div>
                 <div className="col-md-6">
                   <span>
                     <p className="text-light pt-4 pb-0 my-5">Do you have an account
-                      <br /> already? Please
+                      <br /> already? Please login!
                     </p>
-                    <NavLink to="/login">
-                      <button className="button btn-primary mx-5 mb-5" >
-                        <span className="glyphicon glyphicon-log-in"></span> {' '} Login here!
-                      </button>
-                    </NavLink>
                   </span>
                 </div>
               </div>

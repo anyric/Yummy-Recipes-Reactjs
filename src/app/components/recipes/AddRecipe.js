@@ -10,7 +10,6 @@ axios.defaults.headers = { 'Content-Type': 'application/json' };
 export class AddRecipe extends Component {
   constructor() {
     super();
-    this.getCategory();
     this.state = { categorylist: [] };
   }
   getCategory() {
@@ -25,6 +24,9 @@ export class AddRecipe extends Component {
           alert(error.response.data.message);
         }
       });
+  }
+  componentDidMount() {
+    this.getCategory();
   }
   handleInputChange(event) {
     const target = event.target;
@@ -52,7 +54,8 @@ export class AddRecipe extends Component {
                 name="catid"
                 onChange={this.handleInputChange.bind(this)}
               >
-                {this.state.categorylist ? this.state.categorylist.map((category, index) =>
+                {this.state.categorylist.length > 0 ?
+                this.state.categorylist.map((category, index) =>
                   <option value={category.id} key={index}>{category.name}</option>) :
                 <option>No Category</option>
                 }

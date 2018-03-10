@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Pagination } from 'react-bootstrap';
 
 import axios from 'axios';
 
@@ -10,51 +11,71 @@ axios.defaults.headers = { 'Content-Type': 'application/json' };
 export class RecipeReport extends Component {
   constructor(props) {
     super(props);
-    this.getRecipes(null);
     this.state = {
+      categorylist: [],
       recipelist: [],
       search: '',
-      items: 0,
-      currentPage: 1,
-      pages: 0,
-      nextPage: null,
-      previousPage: null,
-      message: '' };
+      totalItems: 1,
+      currentPageNumber: 1,
+      totalPages: 1,
+      message: '',
+    };
   }
-  getRecipes(page) {
+  getCategory() {
     const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
-    let pageURL = '';
-    if (page === null) {
-      pageURL = `${url}category/recipes/`;
-    } else if (typeof page === 'number' && page > 0) {
-      pageURL = `${url}category/recipes/?page=${page}`;
-    } else {
-      pageURL = page;
-    }
     const self = this;
-    axios.get(pageURL, config)
+    axios.get(`${url}allcategory/`, config)
       .then(function (res) {
-        self.setState({
-          recipelist: res.data.recipe.results,
-          items: res.data.recipe.items,
-          currentPage: res.data.recipe.currentPage,
-          pages: res.data.recipe.pages,
-          nextPage: res.data.recipe.next,
-          previousPage: res.data.recipe.previous,
-        });
+        self.setState({ categorylist: res.data });
       })
       .catch(function (error) {
         if (error.response) {
-          self.setState({
-            items: 0,
-            currentPage: 0,
-            pages: 0,
-            nextPage: null,
-            previousPage: null,
-            message: error.response.data.message,
-          });
+          alert(error.response.data.message);
         }
       });
+  }
+  getRecipes(pageNumber, categoryId) {
+    if (categoryId !== null) {
+      const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
+      const self = this;
+      let pageURL = '';
+      if (parseInt(categoryId, 10) > 0) {
+        pageURL = `${url}category/recipes/${categoryId}`;
+      } else {
+        if (pageNumber > 0) {
+          pageURL = `${url}category/recipes/?page=${pageNumber}`;
+        } else {
+          pageURL = `${url}category/recipes/`;
+        }
+      }
+      axios.get(pageURL, config)
+        .then(function (res) {
+          if (res) {
+            self.setState({
+              recipelist: res.data.recipe.results,
+              totalItems: res.data.recipe.items,
+              currentPageNumber: res.data.recipe.page,
+              totalPages: res.data.recipe.pages,
+            });
+          }
+        })
+        .catch(function (error) {
+          const data = { items: 0, page: 0, pages: 0, message: 'No recipes found!' };
+          if (error) {
+            self.setState({
+              recipelist: [],
+              totalItems: data.items,
+              currentPageNumber: data.page,
+              totalPages: data.pages,
+              message: data.message,
+            });
+          }
+        });
+    }
+  }
+  componentDidMount() {
+    this.getCategory();
+    this.getRecipes(1, 0);
   }
   handleSearchInput(event) {
     event.preventDefault();
@@ -74,37 +95,83 @@ export class RecipeReport extends Component {
   handleSearch() {
     this.setState({ search: '' });
   }
-  handlePageChange(page) {
-    if (page > this.state.pages) {
-      page = this.state.pages;
-    }
-    this.getRecipes(page);
+  handleCategorySelect(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
+    this.getRecipes(1, value);
+  }
+  handlePageSelect(number) {
+    this.setState({ currentPageNumber: number });
+    this.getRecipes(number, this.state.categoryId);
   }
   render() {
     const filteredrecipelist = this.state.recipelist ? (this.state.recipelist.filter(
       (recipe) => {
         return recipe.name.indexOf(this.state.search.toLowerCase()) !== -1;
       })) : this.state.recipelist;
-    const pageListElements = [];
-    if (this.state.pages) {
-      for (let i = 1; i <= this.state.pages; i++) {
-        pageListElements.push(
-          <li key={i} className={this.state.currentPage === i ? 'active' : ''}>
-            <a
-              onClick={this.handlePageChange.bind(this, i)}
-              href={this.state.currentPage ? '/dashboard/recipereport' : '#'}
-            >{i }
-            </a>
-          </li>,
+    const items = [];
+    if (this.state.totalPages) {
+      items.push(
+        <Pagination.First
+          key={0}
+          disabled={this.state.currentPageNumber === 1}
+          onClick={this.handlePageSelect.bind(this, 1)}
+        />,
+        <Pagination.Prev
+          key={1}
+          disabled={this.state.currentPageNumber === 1}
+          onClick={this.handlePageSelect.bind(this,
+          (this.state.currentPageNumber - 1) > 1 ? this.state.currentPageNumber - 1 : 1)}
+        />,
+      );
+      for (let i = 1; i <= this.state.totalPages; i++) {
+        items.push(
+          <Pagination.Item
+            key={i + 1}
+            active={i === this.state.currentPageNumber}
+            onClick={this.handlePageSelect.bind(this, i)}
+          >{i}
+          </Pagination.Item>,
         );
       }
+      items.push(
+        <Pagination.Next
+          key={items.length + 1}
+          disabled={this.state.currentPageNumber === this.state.totalPages}
+          onClick={this.handlePageSelect.bind(this,
+          (this.state.currentPageNumber + 1) <= this.state.totalPages
+          ? this.state.currentPageNumber + 1 : this.state.totalPages)}
+        />,
+        <Pagination.Last
+          key={items.length + 2}
+          disabled={this.state.currentPageNumber === this.state.totalPages}
+          onClick={this.handlePageSelect.bind(this, this.state.totalPages)}
+        />,
+      );
     }
     return (
       <div className="container-fluid dborder mt-5 col-sm-8 offset-sm-2 col-md-8 offset-md-1 pt-3">
-        {this.state.recipelist ?
+        <h2>Recipes List</h2>
+        <hr />
+        <select
+          className="form-control col-md-8 mb-3"
+          name="catid"
+          onChange={this.handleCategorySelect.bind(this)}
+        >
+          <option value={0}>All Category</option>
+          {this.state.categorylist.length > 0 ?
+          this.state.categorylist.map((category, index) =>
+            <option value={category.id} key={index}>{category.id} {category.name}</option>) :
+          <option value="null">No Category</option>
+          }
+        </select>
+        {this.state.recipelist.length > 0 ?
           <div>
-            <h2>Recipes List</h2>
-            <hr />
             <div>
               <form>
                 <div className="input-group col-md-8">
@@ -135,8 +202,7 @@ export class RecipeReport extends Component {
                 <li className="list-group-item" key={index}>
                   <small>
                     <span
-                      className=" label label-info"
-                      style={{ marginRight: 5 }}
+                      className=" label label-info report"
                     >
                       {recipe.id}
                     </span>
@@ -152,9 +218,8 @@ export class RecipeReport extends Component {
                     onClick={this.handleRemoveRecipe.bind(this, index, recipe.id)}
                   >
                     <span
-                      className="glyphicon glyphicon-trash pull-right"
+                      className="glyphicon glyphicon-trash pull-right report-detail"
                       data-toggle="modal"
-                      style={{ marginRight: 10 }}
                     >
                     </span>
                   </a>
@@ -166,8 +231,7 @@ export class RecipeReport extends Component {
                     data-backdrop="false"
                   >
                     <span
-                      className="glyphicon glyphicon-pencil pull-right"
-                      style={{ marginRight: 10 }}
+                      className="glyphicon glyphicon-pencil pull-right report-detail"
                     >
                     </span>
                   </a>
@@ -240,40 +304,18 @@ export class RecipeReport extends Component {
                     </div>
                   </div>
                 </li>)}
-              {this.state.items ?
+              {this.state.totalItems ?
                 <nav aria-label="Page navigation">
                   <h4>Total Recipes:
-                    <span className="badge">{this.state.items ? this.state.items : 0}</span>
+                    <span className="badge">{this.state.totalItems ? this.state.totalItems : 0}
+                    </span>
                   </h4>
-                  <ul className="pagination">
-                    <li
-                      className={this.state.currentPage === 1 ? 'disabled' : ''}
-                    >
-                      <a
-                        onClick={this.getRecipes(this.state.currentPage - 1)}
-                        href={this.state.previousPage ? '/dashboard/recipereport' : '#'}
-                        aria-label="Previous"
-                      >
-                        <span aria-hidden="true">&laquo;</span>
-                      </a>
-                    </li>
-                    {pageListElements}
-                    <li
-                      className={this.state.currentPage === this.state.pages ? 'disabled' : ''}
-                    >
-                      <a
-                        onClick={this.getRecipes((this.state.currentPage + 1) > this.state.pages
-                        ? this.state.pages : this.state.currentPage + 1)}
-                        href={this.state.nextPage ? '/dashboard/recipereport' : '#'}
-                        aria-label="Next"
-                      >
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
+                  <Pagination>
+                    <Pagination bsSize="medium">{ items }</Pagination>
+                  </Pagination>
                 </nav> : ''}
             </ul>
-          </div> : <p className="text-center">{this.state.message}</p>}
+          </div> : <p className="text-center">{this.state.message} Please add your recipes.</p>}
       </div>
     );
   }

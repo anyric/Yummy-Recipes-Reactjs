@@ -14,7 +14,7 @@ export function addCategory(event) {
     axios.post(`${url}category`, data, config)
       .then(function (res) {
         alert(res.data.message);
-        this.getCategory();
+        this.getCategory(null);
       })
       .catch(function (error) {
         if (error.response) {
@@ -42,30 +42,7 @@ export function updateCategory(event) {
       alert(error.response.data.message);
     });
 }
-export function getCategory(page) {
-  const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
-  let pageURL = '';
-  if (page === null) {
-    pageURL = `${url}category/`;
-  } else if (typeof page === 'number' && page > 0) {
-    localStorage.removeItem('category');
-    pageURL = `${url}category/?page=${page}`;
-  } else {
-    pageURL = page;
-  }
-  axios.get(pageURL, config)
-    .then(function (res) {
-      localStorage.setItem('pagination', JSON.stringify(res.data.category));
-      localStorage.setItem('category', JSON.stringify(res.data.category.results));
-      localStorage.setItem('allcategory', JSON.stringify(res.data.category.results));
-    })
-    .catch(function (error) {
-      if (error.response) {
-        const pagination = { items: 0, page: 0, pages: 0, next: null, previous: null };
-        localStorage.setItem('pagination', JSON.stringify(pagination));
-        localStorage.setItem('catmessage', JSON.stringify(error.response.data.message));
-      }
-    });
+export function getCategory() {
 }
 export function searchCategory(term) {
   const config = { headers: { 'x-access-token': localStorage.getItem('token') } };

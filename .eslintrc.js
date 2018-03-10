@@ -35,5 +35,6 @@ module.exports = {
         "no-plusplus":0,
         "no-console":0,
         "react/sort-comp":0,
+        "no-lonely-if":0,
     }
 };

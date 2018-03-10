@@ -4,6 +4,15 @@
     overflow-x: hidden;
     height: 1080;
     }
+    .caption-center {
+        margin-bottom: 300px;
+    }
+    .caption-button {
+        right: 0px;
+        position: fixed;
+        top: 0px;
+        text-align: right;
+    }
     .button {
     padding: 15px 25px;
     font-size: 24px;
@@ -22,6 +31,15 @@
         float: left;
         margin-right: 20px;
     }
+    .profile-card {
+        width: 500px;
+    }
+    .report {
+        margin-right: 5px;
+    }
+    .report-detail {
+        margin-right: 10px;
+    }
     .name {
     text-shadow: 2px 3px 3px #292929;
     font-family: "Open Sans Bold", Arial, Helvetica, sans-serif;
@@ -32,7 +50,6 @@
     .footer {
     position: fixed;
     left: 0;
-    /* padding: 20px 0; */
     bottom: 0;
     width: 100%;
     font-style: italic;
