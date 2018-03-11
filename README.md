@@ -18,7 +18,7 @@ The following list of softwares should be first install in order for the app to 
 * ReactJS
 * NodeJS
 * React-bootstrap
-* Bootstrap V4
+* Bootstrap
 
 # Installations
 The following steps should help you setup the environment and get the app runing.
@@ -36,6 +36,7 @@ The following steps should help you setup the environment and get the app runing
 
 
 # Built with
+* NodeJS
 * ReactJS
 * React-bootstrap
 * Bootstrap
