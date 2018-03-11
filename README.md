@@ -16,7 +16,7 @@ The following list of softwares should be first install in order for the app to 
 # Installations
 The following steps should help you setup the environment and get the app runing.
 * Clone the repository on github
-  Using npm or yarn, you can install as;
+* Using npm or yarn, you can install as;
   ``$ npm install`` or ``$yarn install``
 
 * Run the Application as;
