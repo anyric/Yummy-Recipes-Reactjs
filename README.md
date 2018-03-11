@@ -1,5 +1,12 @@
 # Yummy-Recipes-Reactjs
 Yummy Recipes is an application that allow users to keep track of their owesome food recipes. It helps individuals who love to cook and eat good food to remember recipes and also share with others.
+* Screenshots
+![Screenshot of home page](/screenshots/home.png?raw=true "home page")
+![Screenshot of login page](/screenshots/login.png?raw=true "login page")
+![Screenshot of dashboard page](/screenshots/dashboard.png?raw=true "dashboard page")
+![Screenshot of add recipe page](/screenshots/addrecipe.png?raw=true "add recipe page")
+![Screenshot of category report page](/screenshots/catreport.png?raw=true "category report page")
+![Screenshot of edit category dialog](/screenshots/editcat.png?raw=true "edit category dialop")
 
 # Features
 * Users can create accounts, log in, logout,update passwords and delete their accounts
@@ -11,7 +18,7 @@ The following list of softwares should be first install in order for the app to 
 * ReactJS
 * NodeJS
 * React-bootstrap
-* Bootstrap V4
+* Bootstrap
 
 # Installations
 The following steps should help you setup the environment and get the app runing.
@@ -29,6 +36,7 @@ The following steps should help you setup the environment and get the app runing
 
 
 # Built with
+* NodeJS
 * ReactJS
 * React-bootstrap
 * Bootstrap

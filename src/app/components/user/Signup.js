@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import logo from '../../static/img/logo.jpg';
 import * as User from '../../controller/User';
 import '../../static/css/style.css';
 import { Footer } from '../home/Footer';
@@ -10,7 +11,10 @@ export class Signup extends Component {
     return (
       <div>
         <div className="bg-info w3-bar m-0 pb-2">
-          <span className="name p-5"> Yummy Recipes</span>
+          <span className="name p-5">
+            <img className="img-thumbnail logo mr-3 ml-2 bg-warning" src={logo} alt="logo" />
+            Yummy Recipes
+          </span>
         </div>
         <nav className="w3-bar navbar-expand-lg navbar-dark bg-dark ">
           <div className="w3-bar m-0 text-center">
