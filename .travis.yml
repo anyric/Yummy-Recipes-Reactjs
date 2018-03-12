@@ -6,4 +6,4 @@ script:
   - npm test -- --coverage 
 
 after_success:
-  - coveralls < coverage/lcov.info
+  - coveralls
