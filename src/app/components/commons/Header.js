@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
 
-import '../../static/css/w3.css';
-import logo from '../../static/img/logo.jpg';
-import { DashboardWelcome } from '../home/DashboardWelcome';
+import { DashboardWelcome } from '../commons/DashboardWelcome';
 import { UserProfile } from '../user/UserProfile';
 import { ResetPassword } from '../user/ResetPassword';
 import { DeleteAccount } from '../user/DeleteAccount';
@@ -13,6 +11,9 @@ import { AddRecipe } from '../recipes/AddRecipe';
 import { RecipeReport } from '../recipes/RecipeReport';
 import { Footer } from './Footer';
 import * as User from '../../controller/User';
+import '../../static/css/w3.css';
+import '../../static/css/style.css';
+import logo from '../../static/img/logo.jpg';
 
 export class Header extends Component {
   render() {
@@ -24,7 +25,7 @@ export class Header extends Component {
       <BrowserRouter>
         <div className="m-0">
           <div className="row mb-5">
-            <div className="bg-info w3-bar m-0 pb-2">
+            <div className="header-bg w3-bar m-0 pb-2">
               <span className="name p-5">
                 <img className="img-thumbnail logo mr-3 ml-2 bg-warning" src={logo} alt="logo" />
               Yummy Recipes

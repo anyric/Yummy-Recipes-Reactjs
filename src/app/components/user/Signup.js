@@ -4,13 +4,13 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../static/img/logo.jpg';
 import * as User from '../../controller/User';
 import '../../static/css/style.css';
-import { Footer } from '../home/Footer';
+import { Footer } from '../commons/Footer';
 
 export class Signup extends Component {
   render() {
     return (
       <div>
-        <div className="bg-info w3-bar m-0 pb-2">
+        <div className="header-bg w3-bar m-0 pb-2">
           <span className="name p-5">
             <img className="img-thumbnail logo mr-3 ml-2 bg-warning" src={logo} alt="logo" />
             Yummy Recipes

@@ -6,6 +6,11 @@
     }
     .caption-center {
         margin-bottom: 300px;
+
+    }
+    .caption-font {
+        font-family: 'PT Sans Narrow', sans-serif;
+        font-size: 26px;
     }
     .caption-button {
         right: 0px;
@@ -25,6 +30,26 @@
         height: 55px;
         border-radius: 30px;
 
+    }
+    .feature {
+        border-radius: 60px;
+        width: 400px;
+        height: 350px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    .home-bg {
+        background: linear-gradient(to bottom left, #5eb0bd, rgb(173, 173, 10));
+    }
+    .home-font {
+        font-family: 'Teko', sans-serif;
+        font-size: 45px;
+    }
+    .home-bd {
+        font-family: 'PT Sans Narrow', sans-serif;
+        font-size: 20px;
+    }
+    .header-bg {
+        background: linear-gradient(to bottom right, #17a2b8, yellow);
     }
     .profile{
         width: 180px;
