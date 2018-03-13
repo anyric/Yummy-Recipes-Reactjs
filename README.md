@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/anyric/Yummy-Recipes-Reactjs.svg?branch=master)](https://travis-ci.org/anyric/Yummy-Recipes-Reactjs) [![Coverage Status](https://coveralls.io/repos/github/anyric/Yummy-Recipes-Reactjs/badge.svg?branch=master)](https://coveralls.io/github/anyric/Yummy-Recipes-Reactjs?branch=master)
 # Yummy-Recipes-Reactjs
 Yummy Recipes is an application that allow users to keep track of their owesome food recipes. It helps individuals who love to cook and eat good food to remember recipes and also share with others.
 * Screenshots
