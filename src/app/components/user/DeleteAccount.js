@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 
-import axios from 'axios';
-
+import { axiosInstance } from '../../controller/AxiosInstance';
 import * as User from '../../controller/User';
-
 import '../../static/css/style.css';
-
-const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
-axios.defaults.headers = { 'Content-Type': 'application/json' };
-
 
 export class DeleteAccount extends Component {
   constructor() {
@@ -17,9 +11,8 @@ export class DeleteAccount extends Component {
     this.state = { user: [] };
   }
   getUser() {
-    const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
     const self = this;
-    axios.get(`${url}user/view`, config)
+    axiosInstance.get('user/view')
       .then(function (res) {
         self.setState({ user: res.data.User });
       })

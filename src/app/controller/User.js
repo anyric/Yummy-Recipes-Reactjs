@@ -1,7 +1,4 @@
-import axios from 'axios';
-
-const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
-axios.defaults.headers = { 'Content-Type': 'application/json' };
+import { axiosInstance } from '../controller/AxiosInstance';
 
 export function registerUser(event) {
   event.preventDefault();
@@ -11,7 +8,7 @@ export function registerUser(event) {
   const password = event.target.elements.password.value;
   const data = { name: fname, email: email, username: username, password: password };
   if (fname !== '' && email !== '' && username !== '' && password !== '') {
-    axios.post(`${url}user/register`, data)
+    axiosInstance.post('user/register', data)
       .then(function (res) {
         alert(res.data.message);
         window.location.assign('/login');
@@ -31,7 +28,7 @@ export function registerUser(event) {
 }
 export function getUser() {
   const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
-  axios.get(`${url}user/view`, config)
+  axiosInstance.get('user/view', config)
     .then(function (res) {
       localStorage.setItem('profile', JSON.stringify(res.data.User));
     })
@@ -47,7 +44,7 @@ export function loginUser(event) {
   const password = event.target.elements.password.value;
   const data = { username: username, password: password };
   if (username !== '' && password !== '') {
-    axios.post(`${url}user/login`, data)
+    axiosInstance.post('user/login', data)
       .then(function (response) {
         localStorage.setItem('token', response.data.token);
         localStorage.isauth = true;
@@ -66,8 +63,7 @@ export function loginUser(event) {
   event.target.elements.password.value = '';
 }
 export function logoutUser() {
-  axios.defaults.headers = { 'x-access-token': localStorage.getItem('token') };
-  axios.post(`${url}user/logout`)
+  axiosInstance.post('user/logout')
     .then(function (res) {
       alert(res.data.message);
       window.localStorage.removeItem('allcategory');
@@ -87,8 +83,7 @@ export function logoutUser() {
     });
 }
 export function deleteUser() {
-  const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
-  axios.delete(`${url}user/delete`, config)
+  axiosInstance.delete('user/delete')
     .then(function () {
       localStorage.clear();
     })

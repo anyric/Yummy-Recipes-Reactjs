@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { Footer } from './Footer';
+
 import pic1 from '../../static/img/orange.jpg';
 import pic2 from '../../static/img/board_hd.jpg';
 import pic4 from '../../static/img/tomatoes.jpg';
-import pic5 from '../../static/img/fruit.jpg';
+import pic6 from '../../static/img/login.jpg';
+import pic7 from '../../static/img/addrecipe.jpg';
+import pic8 from '../../static/img/catreport.jpg';
 import '../../static/css/style.css';
-import { Footer } from './Footer';
-
 
 export class Home extends Component {
   render() {
@@ -36,8 +38,8 @@ export class Home extends Component {
               <div className="item active">
                 <img src={pic1} alt="Break Fast Menu" />
                 <div className="carousel-caption caption-center">
-                  <h1 className="text-info">Break Fast!</h1>
-                  <h3 className="text-primary">
+                  <h1 className="text-info home-font">Break Fast!</h1>
+                  <h3 className="text-primary caption-font">
                     Start your day off with a delicious break fast menu.
                   </h3>
                 </div>
@@ -45,8 +47,8 @@ export class Home extends Component {
               <div className="item">
                 <img src={pic2} alt="Lunch Menu" />
                 <div className="carousel-caption caption-center">
-                  <h1 className="text-info">Lunch!</h1>
-                  <h3 className="text-primary">
+                  <h1 className="text-info home-font">Lunch!</h1>
+                  <h3 className="text-primary caption-font">
                     Planning for your Lunch?, it just got better with
                     this higly Proteinous shiny fish.
                   </h3>
@@ -55,15 +57,14 @@ export class Home extends Component {
               <div className="item">
                 <img src={pic4} alt="Supper Menu" />
                 <div className="carousel-caption caption-center">
-                  <h1 className="text-info">Supper!</h1>
-                  <h3 className="text-white">
+                  <h1 className="text-info home-font">Supper!</h1>
+                  <h3 className="text-white caption-font">
                     Still filling full after a heavy lunch, worry no more! just grab
                     some tasty chips and a vegetable burgar for a wonderful night long
                     comfortable sleep.
                   </h3>
                 </div>
               </div>
-
             </div>
             <a className="carousel-control-prev" href="#pic" data-slide="prev">
               <span className="carousel-control-prev-icon active"></span>
@@ -74,10 +75,9 @@ export class Home extends Component {
           </div>
         </header>
         <div className="my-0">
-
-          <div className="w3-bar pt-0 pb-0 mt-0 mb-0">
+          <div className="w3-bar home-bd pt-0 pb-0 mt-0 mb-0">
             <div className="col-lg12 mr-0 ml-0 mt-0 bg-dark text-center">
-              <h1 className="text-light pt-4 pb-0 my-0"> Why Yummy recipes?</h1>
+              <h1 className="text-light home-font pt-4 pb-0 my-0"> Why Yummy recipes?</h1>
               <p className="text-light pt-2 pb-2 mt-0 mb-0 mr-5 ml-5">
                 The application allows users to
                 keep track of their owesome food recipes. <br />
@@ -101,7 +101,34 @@ export class Home extends Component {
                 </div>
               </div>
             </div>
-            <img className="container" src={pic5} alt="Chicago" />
+            <div className="row home-bg">
+              <div className="col-md-4 text-center mt-5">
+                <img className="feature" src={pic6} alt="Login" />
+                <div className="text-center"><h2 className="text-dark home-font">User</h2></div>
+                <p className="text-justify home-bd mx-5 mb-5">
+                Signup for an account, login and start tracking those awesome foods you like
+                eating most and to remember sharing with your loved onces.
+                </p>
+              </div>
+              <div className="col-md-4 text-center mt-5">
+                <img className="feature" src={pic8} alt="Chicago" width="200" height="200" />
+                <div className="text-center"><h2 className="text-dark home-font">Category</h2></div>
+                <p className="text-justify home-bd mx-5 mb-5">
+                You no longer have to manually sort your recipes. Create a category like beef
+                stews and save all your beef stews recipes in one place.
+                </p>
+              </div>
+              <div className="col-md-4 text-center mt-5">
+                <img className="feature" src={pic7} alt="Chicago" width="200" height="200" />
+                <div className="text-center">
+                  <h2 className="text-dark home-font">Create Recipes</h2>
+                </div>
+                <p className="text-justify home-bd mx-5 mb-5">
+                Have all your recipes in one place. Now you don't have to worry about that
+                old family recipe ever getting lost.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         <Footer />

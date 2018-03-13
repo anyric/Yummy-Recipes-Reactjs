@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 
 import { Pagination } from 'react-bootstrap';
 
-import axios from 'axios';
-
+import { axiosInstance } from '../../controller/AxiosInstance';
 import * as Category from '../../controller/Category';
-
-const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
-
-axios.defaults.headers = { 'Content-Type': 'application/json' };
 
 export class CategoryReport extends Component {
   constructor(props) {
@@ -23,15 +18,14 @@ export class CategoryReport extends Component {
     };
   }
   getCategory(pageNumber) {
-    const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
     const self = this;
     let pageURL = '';
     if (typeof pageNumber === 'number' && pageNumber > 0) {
-      pageURL = `${url}category/?page=${pageNumber}`;
+      pageURL = `category/?page=${pageNumber}`;
     } else {
-      pageURL = `${url}category/`;
+      pageURL = 'category/';
     }
-    axios.get(pageURL, config)
+    axiosInstance.get(pageURL)
       .then(function (res) {
         self.setState({
           categorylist: res.data.category.results,
@@ -197,7 +191,7 @@ export class CategoryReport extends Component {
                       tabIndex="-1"
                       role="dialog"
                     >
-                      <div className="modal-dialog">
+                      <div className="modal-dialog" key={category.id}>
                         <div className="modal-content">
                           <div className="modal-header">
                             <h3 className="modal-title" id="editcate">Edit Category</h3>

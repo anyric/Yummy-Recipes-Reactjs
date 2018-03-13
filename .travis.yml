@@ -6,4 +6,5 @@ script:
   - npm test -- --coverage 
 
 after_success:
-  - coveralls < coverage/lcov.info
+  - "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  - codeclimate

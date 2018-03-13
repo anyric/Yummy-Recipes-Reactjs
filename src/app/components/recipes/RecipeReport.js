@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { Pagination } from 'react-bootstrap';
 
-import axios from 'axios';
-
+import { axiosInstance } from '../../controller/AxiosInstance';
 import * as Recipes from '../../controller/Recipes';
-
-const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
-axios.defaults.headers = { 'Content-Type': 'application/json' };
 
 export class RecipeReport extends Component {
   constructor(props) {
@@ -22,9 +18,8 @@ export class RecipeReport extends Component {
     };
   }
   getCategory() {
-    const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
     const self = this;
-    axios.get(`${url}allcategory/`, config)
+    axiosInstance.get('allcategory/')
       .then(function (res) {
         self.setState({ categorylist: res.data });
       })
@@ -36,19 +31,18 @@ export class RecipeReport extends Component {
   }
   getRecipes(pageNumber, categoryId) {
     if (categoryId !== null) {
-      const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
       const self = this;
       let pageURL = '';
       if (parseInt(categoryId, 10) > 0) {
-        pageURL = `${url}category/recipes/${categoryId}`;
+        pageURL = `category/recipes/${categoryId}`;
       } else {
         if (pageNumber > 0) {
-          pageURL = `${url}category/recipes/?page=${pageNumber}`;
+          pageURL = `category/recipes/?page=${pageNumber}`;
         } else {
-          pageURL = `${url}category/recipes/`;
+          pageURL = 'category/recipes/';
         }
       }
-      axios.get(pageURL, config)
+      axiosInstance.get(pageURL)
         .then(function (res) {
           if (res) {
             self.setState({
@@ -99,7 +93,6 @@ export class RecipeReport extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-
     this.setState({
       [name]: value,
     });
@@ -248,7 +241,7 @@ export class RecipeReport extends Component {
                     tabIndex="-1"
                     role="dialog"
                   >
-                    <div className="modal-dialog" role="document">
+                    <div className="modal-dialog" key={recipe.id}>
                       <div className="modal-content">
                         <div className="modal-header">
                           <h3 className="modal-title" id="editcate">Edit Recipe</h3>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import axios from 'axios';
+import { axiosInstance } from '../../controller/AxiosInstance';
 
-const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
+// const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
 
 export class ResetPassword extends Component {
   handleSubmit(event) {
@@ -11,7 +11,7 @@ export class ResetPassword extends Component {
     const password = event.target.elements.password.value;
     const data = { email: email, password: password };
     if (email !== '' && password !== '') {
-      axios.put(`${url}user/reset`, data)
+      axiosInstance.put('user/reset', data)
         .then(function (res) {
           alert(res.data.message);
         })
