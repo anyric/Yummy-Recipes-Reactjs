@@ -33,7 +33,7 @@ export class UserProfile extends Component {
             <h4 className="card-title text-dark">
               <strong>{ this.state.user.name }</strong>
             </h4>
-            <p className="card-text text-info">User id: { this.state.user.id }</p>
+            <p className="card-text text-info">User ID: { this.state.user.id }</p>
             <p className="card-text text-info">Email: { this.state.user.email }</p>
             <p className="card-text text-info">Username: { this.state.user.username }</p>
           </div>

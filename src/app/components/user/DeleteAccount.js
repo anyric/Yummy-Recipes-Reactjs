@@ -28,7 +28,7 @@ export class DeleteAccount extends Component {
         <h3>User Account</h3>
         <hr />
         <div className="container">
-          <h4 className="card-title">Mr. { this.state.user.name }</h4>
+          <h4 className="card-title "><strong>{ this.state.user.name }</strong></h4>
           <p>Are you sure you want to delete account
             <strong> { this.state.user.username } </strong>?
           </p>
@@ -37,7 +37,7 @@ export class DeleteAccount extends Component {
             href="/"
             className="nav-link col-sm-4 text-center btn-danger"
           >
-            <span className="glyphicon glyphicon-trash">    Yes Delete</span>
+            <span className="glyphicon glyphicon-trash">    Yes, Delete</span>
           </a>
         </div>
       </div>

@@ -17,6 +17,7 @@ export class CategoryReport extends Component {
       message: '',
     };
   }
+
   getCategory(pageNumber) {
     const self = this;
     let pageURL = '';
@@ -26,12 +27,12 @@ export class CategoryReport extends Component {
       pageURL = 'category/';
     }
     axiosInstance.get(pageURL)
-      .then(function (res) {
+      .then(function (response) {
         self.setState({
-          categorylist: res.data.category.results,
-          totalItems: res.data.category.items,
-          currentPageNumber: res.data.category.page,
-          totalPages: res.data.category.pages,
+          categorylist: response.data.category.results,
+          totalItems: response.data.category.items,
+          currentPageNumber: response.data.category.page,
+          totalPages: response.data.category.pages,
         });
       })
       .catch(function (error) {
@@ -45,14 +46,17 @@ export class CategoryReport extends Component {
         });
       });
   }
+
   componentDidMount() {
     this.getCategory(1);
   }
+
   handleSearchInput(event) {
     event.preventDefault();
     const value = event.target.value;
     this.setState({ search: value });
   }
+
   handleRemoveCategory(index, id) {
     if (id > 0) {
       Category.deleteCategory(id);
@@ -62,19 +66,27 @@ export class CategoryReport extends Component {
     });
     this.setState({ categorylist: deletedCategory });
   }
+
   handleSearch() {
     this.setState({ search: '' });
   }
+
+  handleCategoryUpdate() {
+    this.getCategory(1);
+  }
+
   handlePageSelect(number) {
     this.setState({ currentPageNumber: number });
     this.getCategory(number);
   }
+
   render() {
     const filteredCategoryList = this.state.categorylist ? (this.state.categorylist.filter(
       (category) => {
         return category.name.indexOf(this.state.search.toLowerCase()) !== -1;
       })) : this.state.categorylist;
     const items = [];
+
     if (this.state.totalPages) {
       items.push(
         <Pagination.First
@@ -89,6 +101,7 @@ export class CategoryReport extends Component {
           (this.state.currentPageNumber - 1) > 1 ? this.state.currentPageNumber - 1 : 1)}
         />,
       );
+
       for (let i = 1; i <= this.state.totalPages; i++) {
         items.push(
           <Pagination.Item
@@ -114,6 +127,7 @@ export class CategoryReport extends Component {
         />,
       );
     }
+
     return (
       <div className="container-fluid dborder mt-5 col-sm-9 offset-sm-3 col-md-8 offset-md-2 pt-3">
         {this.state.categorylist.length > 0 ?
@@ -147,13 +161,6 @@ export class CategoryReport extends Component {
               <ul className="list-group">
                 {filteredCategoryList.map((category, index) =>
                   <li className="list-group-item" key={index}>
-                    <small>
-                      <span
-                        className=" label label-info report"
-                      >
-                        {category.id}
-                      </span>
-                    </small>
                     <a className="text-info" data-toggle="collapse" href={`#cat${category.id}`}>
                       {category.name}
                       <span className="caret"></span>
@@ -213,35 +220,37 @@ export class CategoryReport extends Component {
                               <input
                                 type="hidden"
                                 className="form-control"
-                                name="catid"
+                                name="categoryId"
                                 defaultValue={category.id}
                               />
-                              <label htmlFor="name">Name:</label>
+                              <label htmlFor="categoryName">Name:</label>
                               <input
                                 type="text"
                                 className="form-control"
-                                name="catname"
+                                name="categoryName"
                                 defaultValue={category.name}
                               />
                               <label htmlFor="description">Description:</label>
                               <textarea
                                 className="form-control"
                                 row="5"
-                                name="catdesc"
+                                name="description"
                                 defaultValue={category.description}
                               >
                               </textarea>
                             </div>
                             <div className="modal-footer">
-                              <button
-                                type="submit"
-                                className="btn btn-primary"
-                              >
+                              <button type="submit" className="btn btn-primary">
                                 <span className="glyphicon glyphicon-floppy-save">
                                   Update
                                 </span>
                               </button>
-                              <button type="submit" className="btn btn-danger" data-dismiss="modal">
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={this.handleCategoryUpdate.bind(this)}
+                                data-dismiss="modal"
+                              >
                                 <span className="glyphicon glyphicon-remove">    Close     </span>
                               </button>
                             </div>

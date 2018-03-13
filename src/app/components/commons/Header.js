@@ -93,19 +93,19 @@ export class Header extends Component {
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          to="/dashboard/profile"
+                          to="/profile"
                         >
                           <span><i className="glyphicon glyphicon-user"></i> View profile</span>
                         </NavLink>
                       </li>
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/dashboard/reset">
+                        <NavLink className="nav-link text-info" to="/resetpassword">
                           <span><i className="glyphicon glyphicon-pencil"></i> Change password
                           </span>
                         </NavLink>
                       </li>
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/dashboard/delete">
+                        <NavLink className="nav-link text-info" to="/deleteaccount">
                           <span>
                             <i className="glyphicon glyphicon-trash text-danger"></i> Delete Account
                           </span>
@@ -119,14 +119,14 @@ export class Header extends Component {
                   <div id="cat" className="panel-collapse">
                     <ul className="list-group">
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/dashboard/addnewcat">
+                        <NavLink className="nav-link text-info" to="/addnewcategory">
                           <span><i className="glyphicon glyphicon-plus"></i> New Category </span>
                         </NavLink>
                       </li>
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          to="/dashboard/categoryreport"
+                          to="/categoryreport"
                         >
                           <span> <i className="glyphicon glyphicon-folder-open"></i> View Reports
                           </span>
@@ -141,14 +141,14 @@ export class Header extends Component {
                   <div id="recipe" className="panel-collapse">
                     <ul className="list-group">
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/dashboard/addnewrecipe">
+                        <NavLink className="nav-link text-info" to="/addnewrecipe">
                           <span><i className="glyphicon glyphicon-plus"></i> New Recipe </span>
                         </NavLink>
                       </li>
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          to="/dashboard/recipereport"
+                          to="/recipereport"
                         >
                           <span><i className="glyphicon glyphicon-folder-open"></i> View Reports
                           </span>
@@ -160,14 +160,14 @@ export class Header extends Component {
               </ul>
             </div>
             <Switch>
-              <Route path="/dashboard/welcome" component={DashboardWelcome} />
-              <Route path="/dashboard/profile" component={UserProfile} />
-              <Route path="/dashboard/reset" component={ResetPassword} />
-              <Route path="/dashboard/delete" component={DeleteAccount} />
-              <Route path="/dashboard/addnewcat" component={AddCategory} />
-              <Route path="/dashboard/categoryreport" component={CategoryReport} />
-              <Route path="/dashboard/addnewrecipe" component={AddRecipe} />
-              <Route path="/dashboard/recipereport" component={RecipeReport} />
+              <Route path="/welcome" component={DashboardWelcome} />
+              <Route path="/profile" component={UserProfile} />
+              <Route path="/resetpassword" component={ResetPassword} />
+              <Route path="/deleteaccount" component={DeleteAccount} />
+              <Route path="/addnewcategory" component={AddCategory} />
+              <Route path="/categoryreport" component={CategoryReport} />
+              <Route path="/addnewrecipe" component={AddRecipe} />
+              <Route path="/recipereport" component={RecipeReport} />
             </Switch>
           </div>
           <Footer />

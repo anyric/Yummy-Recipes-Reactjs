@@ -20,8 +20,8 @@ export class RecipeReport extends Component {
   getCategory() {
     const self = this;
     axiosInstance.get('allcategory/')
-      .then(function (res) {
-        self.setState({ categorylist: res.data });
+      .then(function (response) {
+        self.setState({ categorylist: response.data });
       })
       .catch(function (error) {
         if (error.response) {
@@ -43,13 +43,13 @@ export class RecipeReport extends Component {
         }
       }
       axiosInstance.get(pageURL)
-        .then(function (res) {
-          if (res) {
+        .then(function (response) {
+          if (response) {
             self.setState({
-              recipelist: res.data.recipe.results,
-              totalItems: res.data.recipe.items,
-              currentPageNumber: res.data.recipe.page,
-              totalPages: res.data.recipe.pages,
+              recipelist: response.data.recipe.results,
+              totalItems: response.data.recipe.items,
+              currentPageNumber: response.data.recipe.page,
+              totalPages: response.data.recipe.pages,
             });
           }
         })
@@ -89,6 +89,39 @@ export class RecipeReport extends Component {
   handleSearch() {
     this.setState({ search: '' });
   }
+  getRecipesByCategory(value) {
+    const self = this;
+    if (value > 0) {
+      axiosInstance.get(`category/recipes/${value}`)
+        .then(function (response) {
+          if (response) {
+            self.setState({
+              recipelist: response.data,
+              totalItems: response.data.length,
+              currentPageNumber: response.data.length,
+              totalPages: response.data.length,
+            });
+          }
+        })
+        .catch(function (error) {
+          const data = { items: 0, page: 0, pages: 0, message: 'No recipes found!' };
+          if (error) {
+            self.setState({
+              recipelist: [],
+              totalItems: data.items,
+              currentPageNumber: data.page,
+              totalPages: data.pages,
+              message: data.message,
+            });
+          }
+        });
+    } else {
+      this.getRecipes(1, 0);
+    }
+  }
+  handleRecipeUpdate() {
+    this.getRecipes(1, 0);
+  }
   handleCategorySelect(event) {
     const target = event.target;
     const value = target.value;
@@ -96,7 +129,7 @@ export class RecipeReport extends Component {
     this.setState({
       [name]: value,
     });
-    this.getRecipes(1, value);
+    this.getRecipesByCategory(value);
   }
   handlePageSelect(number) {
     this.setState({ currentPageNumber: number });
@@ -174,7 +207,7 @@ export class RecipeReport extends Component {
                     name="search"
                     value={this.state.search}
                     onChange={this.handleSearchInput.bind(this)}
-                    placeholder="recipe name"
+                    placeholder="Recipe Name"
                   />
                   <div
                     className="input-group-addon"
@@ -193,13 +226,6 @@ export class RecipeReport extends Component {
             <ul className="list-group">
               {filteredrecipelist.map((recipe, index) =>
                 <li className="list-group-item" key={index}>
-                  <small>
-                    <span
-                      className=" label label-info report"
-                    >
-                      {recipe.id}
-                    </span>
-                  </small>
                   <a className="text-info" data-toggle="collapse" href={`#rec${recipe.id}`}>
                     {recipe.name}
                     <span className="caret"></span>
@@ -230,10 +256,7 @@ export class RecipeReport extends Component {
                   </a>
                   <div id={`rec${recipe.id}`} className="panel-collapse collapse">
                     <br />
-                    <p><strong>Category Id:</strong> {recipe.category_id}</p>
-                    <p><strong>Recipe Id:</strong> {recipe.id}</p>
                     <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                    <p><strong>Date Modified:</strong> {recipe.date_modified}</p>
                   </div>
                   <div
                     id={`edit${recipe.id}`}
@@ -263,21 +286,21 @@ export class RecipeReport extends Component {
                             <input
                               type="hidden"
                               className="form-control"
-                              name="recid"
+                              name="recipeId"
                               defaultValue={recipe.id}
                             />
-                            <label htmlFor="recname">Name:</label>
+                            <label htmlFor="recipeName">Name:</label>
                             <input
                               type="text"
                               className="form-control"
-                              name="reciname"
+                              name="recipeName"
                               defaultValue={recipe.name}
                             />
-                            <label htmlFor="recingre">Ingredients:</label>
+                            <label htmlFor="ingredients">Ingredients:</label>
                             <textarea
                               className="form-control"
                               row="5"
-                              name="recing"
+                              name="ingredients"
                               defaultValue={recipe.ingredients}
                             >
                             </textarea>
@@ -288,7 +311,12 @@ export class RecipeReport extends Component {
                                 Update
                               </span>
                             </button>
-                            <button type="button" className="btn btn-danger" data-dismiss="modal">
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              onClick={this.handleRecipeUpdate.bind(this)}
+                              data-dismiss="modal"
+                            >
                               <span className="glyphicon glyphicon-remove">    Close     </span>
                             </button>
                           </div>

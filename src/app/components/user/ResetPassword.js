@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { axiosInstance } from '../../controller/AxiosInstance';
 
-// const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
-
 export class ResetPassword extends Component {
   handleSubmit(event) {
     event.preventDefault();
@@ -34,7 +32,7 @@ export class ResetPassword extends Component {
             <div className="col-xs-7">
               <h2>Reset Password</h2>
               <hr />
-              <p>Please fill in form details below to reset your password!.</p>
+              <p>Please fill in form details below to reset your password!</p>
             </div>
             <div className="form-group col-xs-7">
               <label htmlFor="email">Email:</label>
