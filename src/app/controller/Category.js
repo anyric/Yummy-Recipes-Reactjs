@@ -1,6 +1,9 @@
+/**
+ * Module for category business logic functions
+ */
+import { notify } from 'react-notify-toast';
 import { axiosInstance } from '../controller/AxiosInstance';
 
-// category logic functions
 export function addCategory(event) {
   event.preventDefault();
   const categoryName = event.target.elements.categoryName.value;
@@ -10,16 +13,16 @@ export function addCategory(event) {
   if (categoryName !== '' && description !== '') {
     axiosInstance.post('category', data)
       .then(function (response) {
-        alert(response.data.message);
+        notify.show(response.data.message, 'success', 4000);
         this.getCategory(null);
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   } else {
-    alert('Please fill in all fields!');
+    notify.show('Please fill in all fields!', 'error', 4000);
   }
   event.target.elements.categoryName.value = '';
   event.target.elements.description.value = '';
@@ -31,24 +34,28 @@ export function updateCategory(event) {
   const categoryName = event.target.elements.categoryName.value;
   const description = event.target.elements.description.value;
   const data = { name: categoryName, description: description };
-  console.log(data);
-  axiosInstance.put(`category/${categoryId}`, data)
-    .then(function (response) {
-      alert(response.data.message);
-    })
-    .catch(function (error) {
-      alert(error.response.data.message);
-    });
+
+  if (categoryName !== '' && description !== '') {
+    axiosInstance.put(`category/${categoryId}`, data)
+      .then(function (response) {
+        notify.show(response.data.message, 'success', 4000);
+      })
+      .catch(function (error) {
+        notify.show(error.response.data.message, 'error', 4000);
+      });
+  } else {
+    notify.show('Please fill in all fileds!', 'error', 4000);
+  }
 }
 
 export function deleteCategory(id) {
   axiosInstance.delete(`category/${id}`)
     .then(function (response) {
-      alert(response.data.message);
+      notify.show(response.data.message, 'success', 4000);
     })
     .catch(function (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        notify.show(error.response.data.message, 'error', 4000);
       }
     });
 }

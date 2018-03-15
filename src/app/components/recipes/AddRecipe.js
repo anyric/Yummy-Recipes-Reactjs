@@ -1,9 +1,15 @@
+/**
+ * Module for adding new recipe
+ */
 import React, { Component } from 'react';
+import { notify } from 'react-notify-toast';
 
 import { axiosInstance } from '../../controller/AxiosInstance';
 import * as Recipes from '../../controller/Recipes';
 
 export class AddRecipe extends Component {
+  /** AddRecipe class to display form and handle user input */
+
   constructor() {
     super();
     this.state = { categorylist: [] };
@@ -17,7 +23,7 @@ export class AddRecipe extends Component {
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   }

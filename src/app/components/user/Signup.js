@@ -1,3 +1,6 @@
+/**
+ * Module for user signup/registration
+ */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -7,6 +10,8 @@ import '../../static/css/style.css';
 import { Footer } from '../commons/Footer';
 
 export class Signup extends Component {
+/** Signup class to display signup form and  handle user registration */
+
   render() {
     return (
       <div>

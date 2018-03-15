@@ -1,5 +1,10 @@
+/**
+ * Module for Navigating the application
+ */
 import React, { Component } from 'react';
 import { BrowserRouter, Route, NavLink, Switch } from 'react-router-dom';
+
+import Notifications from 'react-notify-toast';
 
 import { DashboardWelcome } from '../commons/DashboardWelcome';
 import { UserProfile } from '../user/UserProfile';
@@ -16,9 +21,10 @@ import '../../static/css/style.css';
 import logo from '../../static/img/logo.jpg';
 
 export class Header extends Component {
+/** Header class handles navigation within the application */
   render() {
     const user = localStorage.getItem('user');
-    if (!localStorage.isauth) {
+    if (!localStorage.isAuthenticated) {
       window.location.assign('/login');
     }
     return (
@@ -32,6 +38,8 @@ export class Header extends Component {
               </span>
             </div>
             <nav className="w3-bar navbar-expand-lg navbar-dark bg-dark ">
+              <Notifications />
+
               <div className="w3-bar m-0 text-center">
                 <button
                   className="navbar-toggler"

@@ -1,6 +1,9 @@
+/**
+ * Module for recipe business logic functions
+ */
+import { notify } from 'react-notify-toast';
 import { axiosInstance } from '../controller/AxiosInstance';
 
-// recipe logic functions
 export function addRecipe(event) {
   event.preventDefault();
   const categoryId = parseInt(event.target.elements.categoryId.value, 10);
@@ -11,15 +14,15 @@ export function addRecipe(event) {
   if (categoryId !== '' && recipeName !== '' && recipeName && ingredients !== '') {
     axiosInstance.post('category/recipes', data)
       .then(function (response) {
-        alert(response.data.message);
+        notify.show(response.data.message, 'success', 4000);
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   } else {
-    alert('Please fill in all fields!');
+    notify.show('Please fill in all fields!', 'error', 4000);
   }
   event.target.elements.recipeName.value = '';
   event.target.elements.ingredients.value = '';
@@ -31,24 +34,27 @@ export function updateRecipe(event) {
   const recipeName = event.target.elements.recipeName.value;
   const ingredients = event.target.elements.ingredients.value;
   const data = { name: recipeName, ingredients: ingredients };
-
-  axiosInstance.put(`category/recipes/${recipeId}`, data)
-    .then(function (response) {
-      alert(response.data.message);
-    })
-    .catch(function (error) {
-      alert(error.response.data.message);
-    });
+  if (recipeName !== '' && ingredients !== '') {
+    axiosInstance.put(`category/recipes/${recipeId}`, data)
+      .then(function (response) {
+        notify.show(response.data.message, 'success', 4000);
+      })
+      .catch(function (error) {
+        notify.show(error.response.data.message, 'error', 4000);
+      });
+  } else {
+    notify.show('Please fill in all fields!', 'error', 4000);
+  }
 }
 
 export function deleteRecipe(id) {
   axiosInstance.delete(`category/recipes/${id}`)
     .then(function (response) {
-      alert(response.data.message);
+      notify.show(response.data.message, 'success', 4000);
     })
     .catch(function (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        notify.show(error.response.data.message, 'error', 4000);
       }
     });
 }

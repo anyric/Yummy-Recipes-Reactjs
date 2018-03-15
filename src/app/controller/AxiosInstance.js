@@ -1,3 +1,6 @@
+/**
+ * Module for connecting to api server
+ */
 import axios from 'axios';
 
 export const axiosInstance = axios.create({

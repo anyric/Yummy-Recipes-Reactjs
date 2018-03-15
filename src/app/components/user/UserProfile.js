@@ -1,3 +1,6 @@
+/**
+ * Module for user profile details
+ */
 import React, { Component } from 'react';
 
 import { axiosInstance } from '../../controller/AxiosInstance';
@@ -5,11 +8,14 @@ import '../../static/css/style.css';
 import pic1 from '../../static/img/head.jpg';
 
 export class UserProfile extends Component {
+/** UserProfile class to generate and display user  */
+
   constructor() {
     super();
     this.getUser();
     this.state = { user: [] };
   }
+
   getUser() {
     const self = this;
     axiosInstance.get('user/view')
@@ -22,6 +28,7 @@ export class UserProfile extends Component {
         }
       });
   }
+
   render() {
     return (
       <div className="container-fluid dborder mt-5 col-sm-9 offset-sm-3 col-md-8 offset-md-2 pt-3">

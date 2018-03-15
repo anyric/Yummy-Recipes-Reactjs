@@ -1,10 +1,16 @@
+/**
+ * Module for deleting user account
+ */
 import React, { Component } from 'react';
+import { notify } from 'react-notify-toast';
 
 import { axiosInstance } from '../../controller/AxiosInstance';
 import * as User from '../../controller/User';
 import '../../static/css/style.css';
 
 export class DeleteAccount extends Component {
+  /** DeleteAccount class to handle user account deletion */
+
   constructor() {
     super();
     this.getUser();
@@ -13,12 +19,12 @@ export class DeleteAccount extends Component {
   getUser() {
     const self = this;
     axiosInstance.get('user/view')
-      .then(function (res) {
-        self.setState({ user: res.data.User });
+      .then(function (response) {
+        self.setState({ user: response.data.User });
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   }

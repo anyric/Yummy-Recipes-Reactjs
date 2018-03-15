@@ -40,6 +40,9 @@
     .home-bg {
         background: linear-gradient(to bottom left, #5eb0bd, rgb(173, 173, 10));
     }
+    .bottom-link {
+        left: 200px;
+    }
     .home-font {
         font-family: 'Teko', sans-serif;
         font-size: 45px;

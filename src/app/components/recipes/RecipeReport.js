@@ -1,15 +1,20 @@
+/**
+ * Module for generating and viewing recipe list of a user
+ */
 import React, { Component } from 'react';
 import { Pagination } from 'react-bootstrap';
-
+import { notify } from 'react-notify-toast';
 import { axiosInstance } from '../../controller/AxiosInstance';
 import * as Recipes from '../../controller/Recipes';
 
 export class RecipeReport extends Component {
+  /** RecipeReport class to handle report generation and display */
+
   constructor(props) {
     super(props);
     this.state = {
-      categorylist: [],
-      recipelist: [],
+      categoryList: [],
+      recipeList: [],
       search: '',
       totalItems: 1,
       currentPageNumber: 1,
@@ -17,22 +22,25 @@ export class RecipeReport extends Component {
       message: '',
     };
   }
+
   getCategory() {
     const self = this;
     axiosInstance.get('allcategory/')
       .then(function (response) {
-        self.setState({ categorylist: response.data });
+        self.setState({ categoryList: response.data });
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   }
+
   getRecipes(pageNumber, categoryId) {
     if (categoryId !== null) {
       const self = this;
       let pageURL = '';
+
       if (parseInt(categoryId, 10) > 0) {
         pageURL = `category/recipes/${categoryId}`;
       } else {
@@ -42,11 +50,12 @@ export class RecipeReport extends Component {
           pageURL = 'category/recipes/';
         }
       }
+
       axiosInstance.get(pageURL)
         .then(function (response) {
           if (response) {
             self.setState({
-              recipelist: response.data.recipe.results,
+              recipeList: response.data.recipe.results,
               totalItems: response.data.recipe.items,
               currentPageNumber: response.data.recipe.page,
               totalPages: response.data.recipe.pages,
@@ -57,38 +66,18 @@ export class RecipeReport extends Component {
           const data = { items: 0, page: 0, pages: 0, message: 'No recipes found!' };
           if (error) {
             self.setState({
-              recipelist: [],
+              recipeList: [],
               totalItems: data.items,
               currentPageNumber: data.page,
               totalPages: data.pages,
               message: data.message,
             });
+            notify.show(error.response.data.message, 'error', 4000);
           }
         });
     }
   }
-  componentDidMount() {
-    this.getCategory();
-    this.getRecipes(1, 0);
-  }
-  handleSearchInput(event) {
-    event.preventDefault();
-    const value = event.target.value;
-    this.getRecipes(null);
-    this.setState({ search: value });
-  }
-  handleRemoveRecipe(index, id) {
-    if (id > 0) {
-      Recipes.deleteRecipe(id);
-    }
-    const deletedRecipe = this.state.recipelist.filter(function (e, i) {
-      return i !== index;
-    });
-    this.setState({ recipelist: deletedRecipe });
-  }
-  handleSearch() {
-    this.setState({ search: '' });
-  }
+
   getRecipesByCategory(value) {
     const self = this;
     if (value > 0) {
@@ -96,7 +85,7 @@ export class RecipeReport extends Component {
         .then(function (response) {
           if (response) {
             self.setState({
-              recipelist: response.data,
+              recipeList: response.data,
               totalItems: response.data.length,
               currentPageNumber: response.data.length,
               totalPages: response.data.length,
@@ -107,21 +96,90 @@ export class RecipeReport extends Component {
           const data = { items: 0, page: 0, pages: 0, message: 'No recipes found!' };
           if (error) {
             self.setState({
-              recipelist: [],
+              recipeList: [],
               totalItems: data.items,
               currentPageNumber: data.page,
               totalPages: data.pages,
               message: data.message,
             });
+            notify.show(error.response.data.message, 'error', 4000);
           }
         });
     } else {
       this.getRecipes(1, 0);
     }
   }
-  handleRecipeUpdate() {
+
+  searchRecipesName(nameValue) {
+    const self = this;
+    if (typeof nameValue === 'string' && nameValue !== '') {
+      axiosInstance.get(`category/recipes/?q=${nameValue}`)
+        .then(function (response) {
+          if (response) {
+            self.setState({
+              recipeList: response.data,
+              totalItems: response.data.length,
+              currentPageNumber: response.data.length,
+              totalPages: response.data.length,
+            });
+          }
+        })
+        .catch(function (error) {
+          const data = { items: 0, page: 0, pages: 0, message: 'No recipes found!' };
+          if (error) {
+            self.setState({
+              recipeList: [],
+              totalItems: data.items,
+              currentPageNumber: data.page,
+              totalPages: data.pages,
+              message: data.message,
+            });
+            notify.show(error.response.data.message, 'error', 4000);
+          }
+        });
+    } else {
+      this.getRecipes(1, 0);
+    }
+  }
+
+  componentDidMount() {
+    this.getCategory();
     this.getRecipes(1, 0);
   }
+
+  handleSearchInput(event) {
+    event.preventDefault();
+    const value = event.target.value;
+    this.getRecipes(null);
+    this.setState({ search: value });
+    this.searchRecipesName(value);
+    if (value === '') {
+      this.setState({ message: '' });
+    }
+  }
+
+  handleRemoveRecipe(index, id) {
+    if (id > 0) {
+      Recipes.deleteRecipe(id);
+    }
+    const deletedRecipe = this.state.recipelist.filter(function (e, i) {
+      return i !== index;
+    });
+    this.setState({ recipeList: deletedRecipe });
+  }
+
+  handleSearch() {
+    this.setState({ search: '' });
+  }
+
+  handleRecipeUpdate() {
+    this.setState({
+      message: '',
+    });
+    this.handleSearch();
+    this.getRecipes(1, 0);
+  }
+
   handleCategorySelect(event) {
     const target = event.target;
     const value = target.value;
@@ -131,15 +189,13 @@ export class RecipeReport extends Component {
     });
     this.getRecipesByCategory(value);
   }
+
   handlePageSelect(number) {
     this.setState({ currentPageNumber: number });
     this.getRecipes(number, this.state.categoryId);
   }
+
   render() {
-    const filteredrecipelist = this.state.recipelist ? (this.state.recipelist.filter(
-      (recipe) => {
-        return recipe.name.indexOf(this.state.search.toLowerCase()) !== -1;
-      })) : this.state.recipelist;
     const items = [];
     if (this.state.totalPages) {
       items.push(
@@ -155,6 +211,7 @@ export class RecipeReport extends Component {
           (this.state.currentPageNumber - 1) > 1 ? this.state.currentPageNumber - 1 : 1)}
         />,
       );
+
       for (let i = 1; i <= this.state.totalPages; i++) {
         items.push(
           <Pagination.Item
@@ -180,51 +237,54 @@ export class RecipeReport extends Component {
         />,
       );
     }
+
     return (
       <div className="container-fluid dborder mt-5 col-sm-8 offset-sm-2 col-md-8 offset-md-1 pt-3">
         <h2>Recipes List</h2>
-        <hr />
-        <select
-          className="form-control col-md-8 mb-3"
-          name="catid"
-          onChange={this.handleCategorySelect.bind(this)}
-        >
-          <option value={0}>All Category</option>
-          {this.state.categorylist.length > 0 ?
-          this.state.categorylist.map((category, index) =>
-            <option value={category.id} key={index}>{category.id} {category.name}</option>) :
-          <option value="null">No Category</option>
-          }
-        </select>
-        {this.state.recipelist.length > 0 ?
-          <div>
-            <div>
-              <form>
-                <div className="input-group col-md-8">
-                  <input
-                    type="text"
-                    className="col-sm-12 py-2"
-                    name="search"
-                    value={this.state.search}
-                    onChange={this.handleSearchInput.bind(this)}
-                    placeholder="Recipe Name"
-                  />
-                  <div
-                    className="input-group-addon"
-                    role="button"
-                    onClick={this.handleSearch.bind(this)}
-                    tabIndex={0}
-                  >
-                    <span className="glyphicon glyphicon-search"></span>
-                  </div>
-                </div>
-              </form>
+        <div>
+          <select
+            className="form-control col-md-8 mb-3"
+            name="catid"
+            onChange={this.handleCategorySelect.bind(this)}
+          >
+            <option value={0}>All Category</option>
+            {this.state.categoryList.length > 0 ?
+            this.state.categoryList.map((category, index) =>
+              <option value={category.id} key={index}>{category.id} {category.name}</option>) :
+            <option value="null">No Category</option>
+            }
+          </select>
+        </div>
+        <div>
+          <form>
+            <div className="input-group col-md-8">
+              <input
+                type="text"
+                className="col-sm-12 py-2"
+                name="search"
+                value={this.state.search}
+                onChange={this.handleSearchInput.bind(this)}
+                placeholder="Recipe Name"
+              />
+              <div
+                className="input-group-addon"
+                role="button"
+                onClick={this.handleSearch.bind(this)}
+                tabIndex={0}
+              >
+                <span className="glyphicon glyphicon-search"></span>
+              </div>
             </div>
-            <br /><br />
-            {filteredrecipelist ?
+          </form>
+        </div>
+        <hr />
+        { this.state.message ? this.state.message : ''}
+        {this.state.recipeList.length > 0 ?
+          <div>
+            {this.state.recipeList ?
               <p>Click on a recipe item for more details.</p> : 'No Recipe with that name!' }
             <ul className="list-group">
-              {filteredrecipelist.map((recipe, index) =>
+              {this.state.recipeList.map((recipe, index) =>
                 <li className="list-group-item" key={index}>
                   <a className="text-info" data-toggle="collapse" href={`#rec${recipe.id}`}>
                     {recipe.name}
@@ -327,7 +387,7 @@ export class RecipeReport extends Component {
                 </li>)}
               {this.state.totalItems ?
                 <nav aria-label="Page navigation">
-                  <h4>Total Recipes:
+                  <h4>Total:
                     <span className="badge">{this.state.totalItems ? this.state.totalItems : 0}
                     </span>
                   </h4>
@@ -336,7 +396,15 @@ export class RecipeReport extends Component {
                   </Pagination>
                 </nav> : ''}
             </ul>
-          </div> : <p className="text-center">{this.state.message} Please add your recipes.</p>}
+          </div> :
+          <p className="text-center"> <br /> <br /> <br /> <br />
+            <button
+              type="button"
+              className="glyphicon glyphicon-backward btn btn-primary"
+              onClick={this.handleRecipeUpdate.bind(this)}
+            >  Back
+            </button>
+          </p>}
       </div>
     );
   }

@@ -1,6 +1,11 @@
+/**
+ * Module for page footer
+ */
 import React, { Component } from 'react';
 
 export class Footer extends Component {
+/** Footer class handes display of page footer */
+
   render() {
     return (
       <div className="row">

@@ -1,8 +1,13 @@
+/**
+ * Module for adding new recipe category
+ */
 import React, { Component } from 'react';
 
 import * as Category from '../../controller/Category';
 
 export class AddCategory extends Component {
+  /** AddCategory class to display form and handle user input */
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;

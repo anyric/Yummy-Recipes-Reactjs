@@ -1,8 +1,13 @@
+/**
+ * Module for application dashboard
+ */
 import React, { Component } from 'react';
 
 import { Header } from './Header';
 
 export class Dashboard extends Component {
+/** Dashboard class handles one page entry into the application */
+
   render() {
     return (
       <div>
