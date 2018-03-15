@@ -15,8 +15,8 @@ export function registerUser(event) {
   if (fname !== '' && email !== '' && username !== '' && password !== '') {
     axiosInstance.post('user/register', data)
       .then(function (response) {
-        notify.show(response.data.message, 'success', 4000);
         window.location.assign('/login');
+        notify.show(response.data.message, 'success', 4000);
       })
       .catch(function (error) {
         if (error.response) {
@@ -73,9 +73,9 @@ export function loginUser(event) {
 export function logoutUser() {
   axiosInstance.post('user/logout')
     .then(function (response) {
-      notify.show(response.data.message, 'error', 4000);
       window.localStorage.clear();
       window.location.assign('/login');
+      notify.show(response.data.message, 'error', 4000);
     })
     .catch(function (error) {
       if (error.response) {
@@ -87,13 +87,13 @@ export function logoutUser() {
 export function deleteUser() {
   axiosInstance.delete('user/delete')
     .then(function (response) {
-      notify.show(response.data.message, 'success', 4000);
       localStorage.clear();
+      notify.show(response.data.message, 'success', 4000);
     })
     .catch(function (error) {
       if (error.response) {
-        notify.show(error.response.data.message, 'error', 4000);
         localStorage.clear();
+        notify.show(error.response.data.message, 'error', 4000);
       }
     });
 }
