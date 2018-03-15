@@ -1,3 +1,6 @@
+/**
+ * Module for user login
+ */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -8,6 +11,8 @@ import { Footer } from '../commons/Footer';
 import * as User from '../../controller/User';
 
 export class Login extends Component {
+  /** Login class to display login form and handle user authetication */
+
   render() {
     return (
       <div>

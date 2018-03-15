@@ -1,3 +1,7 @@
+/**
+ * Module for user business logic functions
+ */
+import { notify } from 'react-notify-toast';
 import { axiosInstance } from '../controller/AxiosInstance';
 
 export function registerUser(event) {
@@ -7,37 +11,40 @@ export function registerUser(event) {
   const username = event.target.elements.username.value;
   const password = event.target.elements.password.value;
   const data = { name: fname, email: email, username: username, password: password };
+
   if (fname !== '' && email !== '' && username !== '' && password !== '') {
     axiosInstance.post('user/register', data)
-      .then(function (res) {
-        alert(res.data.message);
+      .then(function (response) {
+        notify.show(response.data.message, 'success', 4000);
         window.location.assign('/login');
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   } else {
-    alert('Please fill in all fields!');
+    notify.show('Please fill in all fields!', 'error', 4000);
   }
   event.target.elements.fname.value = '';
   event.target.elements.email.value = '';
   event.target.elements.username.value = '';
   event.target.elements.password.value = '';
 }
+
 export function getUser() {
   const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
   axiosInstance.get('user/view', config)
-    .then(function (res) {
-      localStorage.setItem('profile', JSON.stringify(res.data.User));
+    .then(function (response) {
+      localStorage.setItem('profile', JSON.stringify(response.data.User));
     })
     .catch(function (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        notify.show(error.response.data.message, 'error', 4000);
       }
     });
 }
+
 export function loginUser(event) {
   event.preventDefault();
   const username = event.target.elements.username.value;
@@ -47,13 +54,13 @@ export function loginUser(event) {
     axiosInstance.post('user/login', data)
       .then(function (response) {
         localStorage.setItem('token', response.data.token);
-        localStorage.isauth = true;
+        localStorage.isAuthenticated = true;
         localStorage.setItem('user', username);
-        window.location.assign('/dashboard/welcome');
+        window.location.assign('/welcome');
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   } else {
@@ -62,34 +69,30 @@ export function loginUser(event) {
   event.target.elements.username.value = '';
   event.target.elements.password.value = '';
 }
+
 export function logoutUser() {
   axiosInstance.post('user/logout')
-    .then(function (res) {
-      alert(res.data.message);
-      window.localStorage.removeItem('allcategory');
-      window.localStorage.removeItem('category');
-      window.localStorage.removeItem('pagination');
-      window.localStorage.removeItem('recipes');
-      window.localStorage.removeItem('paginate');
-      window.localStorage.removeItem('catmessage');
-      window.localStorage.removeItem('recipemessage');
+    .then(function (response) {
+      notify.show(response.data.message, 'error', 4000);
       window.localStorage.clear();
       window.location.assign('/login');
     })
     .catch(function (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        notify.show(error.response.data.message, 'error', 4000);
       }
     });
 }
+
 export function deleteUser() {
   axiosInstance.delete('user/delete')
-    .then(function () {
+    .then(function (response) {
+      notify.show(response.data.message, 'success', 4000);
       localStorage.clear();
     })
     .catch(function (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        notify.show(error.response.data.message, 'error', 4000);
         localStorage.clear();
       }
     });

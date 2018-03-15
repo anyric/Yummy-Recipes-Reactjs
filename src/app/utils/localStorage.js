@@ -1,3 +1,6 @@
+/**
+ * Module for to simulate localstorage for jest testing
+ */
 module.exports = {
   setLocalStorage: function () {
     global.localStorage = {

@@ -1,10 +1,16 @@
+/**
+ * Module for deleting user account
+ */
 import React, { Component } from 'react';
+import { notify } from 'react-notify-toast';
 
 import { axiosInstance } from '../../controller/AxiosInstance';
 import * as User from '../../controller/User';
 import '../../static/css/style.css';
 
 export class DeleteAccount extends Component {
+  /** DeleteAccount class to handle user account deletion */
+
   constructor() {
     super();
     this.getUser();
@@ -13,12 +19,12 @@ export class DeleteAccount extends Component {
   getUser() {
     const self = this;
     axiosInstance.get('user/view')
-      .then(function (res) {
-        self.setState({ user: res.data.User });
+      .then(function (response) {
+        self.setState({ user: response.data.User });
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   }
@@ -28,7 +34,7 @@ export class DeleteAccount extends Component {
         <h3>User Account</h3>
         <hr />
         <div className="container">
-          <h4 className="card-title">Mr. { this.state.user.name }</h4>
+          <h4 className="card-title "><strong>{ this.state.user.name }</strong></h4>
           <p>Are you sure you want to delete account
             <strong> { this.state.user.username } </strong>?
           </p>
@@ -37,7 +43,7 @@ export class DeleteAccount extends Component {
             href="/"
             className="nav-link col-sm-4 text-center btn-danger"
           >
-            <span className="glyphicon glyphicon-trash">    Yes Delete</span>
+            <span className="glyphicon glyphicon-trash">    Yes, Delete</span>
           </a>
         </div>
       </div>

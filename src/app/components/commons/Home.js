@@ -1,3 +1,6 @@
+/**
+ * Module for the home page of the application
+ */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -12,10 +15,13 @@ import pic8 from '../../static/img/catreport.jpg';
 import '../../static/css/style.css';
 
 export class Home extends Component {
+/** Home class handles the home page */
+
   render() {
     return (
       <div>
         <header className="w3-bar">
+          <div id="top"></div>
           <div id="pic" className="carousel slide p-0" data-ride="carousel">
             <div className="carousel-caption caption-button">
               <NavLink to="/signup">
@@ -28,6 +34,9 @@ export class Home extends Component {
                   <span className="glyphicon glyphicon-log-in"></span> {' '} Login here!
                 </button>
               </NavLink>
+              <a className="text-white text-left mr-5" href="#screenshot">
+                <span className="glyphicon glyphicon-chevron-down active"></span>
+              </a>
             </div>
             <ol className="carousel-indicators pt-0 mt-0">
               <li data-target="#pic" data-slide-to="0" className="active"></li>
@@ -101,32 +110,35 @@ export class Home extends Component {
                 </div>
               </div>
             </div>
-            <div className="row home-bg">
-              <div className="col-md-4 text-center mt-5">
-                <img className="feature" src={pic6} alt="Login" />
-                <div className="text-center"><h2 className="text-dark home-font">User</h2></div>
-                <p className="text-justify home-bd mx-5 mb-5">
-                Signup for an account, login and start tracking those awesome foods you like
-                eating most and to remember sharing with your loved onces.
-                </p>
-              </div>
-              <div className="col-md-4 text-center mt-5">
-                <img className="feature" src={pic8} alt="Chicago" width="200" height="200" />
-                <div className="text-center"><h2 className="text-dark home-font">Category</h2></div>
-                <p className="text-justify home-bd mx-5 mb-5">
-                You no longer have to manually sort your recipes. Create a category like beef
-                stews and save all your beef stews recipes in one place.
-                </p>
-              </div>
-              <div className="col-md-4 text-center mt-5">
-                <img className="feature" src={pic7} alt="Chicago" width="200" height="200" />
-                <div className="text-center">
-                  <h2 className="text-dark home-font">Create Recipes</h2>
+            <div id="screenshot" className="row home-bg">
+              <div>
+                <div className="col-md-4 text-center mt-5">
+                  <img className="feature" src={pic6} alt="Login" />
+                  <div className="text-center"><h2 className="text-dark home-font">User</h2></div>
+                  <p className="text-justify home-bd mx-5 mb-5">
+                  Signup for an account, login and start tracking those awesome foods you like
+                  eating most and to remember sharing with your loved onces.
+                  </p>
                 </div>
-                <p className="text-justify home-bd mx-5 mb-5">
-                Have all your recipes in one place. Now you don't have to worry about that
-                old family recipe ever getting lost.
-                </p>
+                <div className="col-md-4 text-center mt-5">
+                  <img className="feature" src={pic8} alt="Chicago" width="200" height="200" />
+                  <div className="text-center"><h2 className="text-dark home-font">Category</h2>
+                  </div>
+                  <p className="text-justify home-bd mx-5 mb-5">
+                  You no longer have to manually sort your recipes. Create a category like beef
+                  stews and save all your beef stews recipes in one place.
+                  </p>
+                </div>
+                <div className="col-md-4 text-center mt-5">
+                  <img className="feature" src={pic7} alt="Chicago" width="200" height="200" />
+                  <div className="text-center">
+                    <h2 className="text-dark home-font">Create Recipes</h2>
+                  </div>
+                  <p className="text-justify home-bd mx-5 mb-5">
+                  Have all your recipes in one place. Now you don't have to worry about that
+                  old family recipe ever getting lost.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

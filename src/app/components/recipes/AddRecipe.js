@@ -1,29 +1,37 @@
+/**
+ * Module for adding new recipe
+ */
 import React, { Component } from 'react';
+import { notify } from 'react-notify-toast';
 
 import { axiosInstance } from '../../controller/AxiosInstance';
 import * as Recipes from '../../controller/Recipes';
 
 export class AddRecipe extends Component {
+  /** AddRecipe class to display form and handle user input */
+
   constructor() {
     super();
     this.state = { categorylist: [] };
   }
+
   getCategory() {
-    const config = { headers: { 'x-access-token': localStorage.getItem('token') } };
     const self = this;
-    axiosInstance.get('allcategory/', config)
-      .then(function (res) {
-        self.setState({ categorylist: res.data });
+    axiosInstance.get('allcategory/')
+      .then(function (response) {
+        self.setState({ categorylist: response.data });
       })
       .catch(function (error) {
         if (error.response) {
-          alert(error.response.data.message);
+          notify.show(error.response.data.message, 'error', 4000);
         }
       });
   }
+
   componentDidMount() {
     this.getCategory();
   }
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -33,6 +41,7 @@ export class AddRecipe extends Component {
       [name]: value,
     });
   }
+
   render() {
     return (
       <div className="container-fluid dborder mt-5 col-sm-8 offset-sm-2 col-md-8 offset-md-1 pt-3">

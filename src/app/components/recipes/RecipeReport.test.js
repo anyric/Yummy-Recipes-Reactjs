@@ -11,4 +11,8 @@ describe('<RecipeReport />', () => {
   it('<RecipeReport />', () => {
     expect(component).toHaveLength(1);
   });
+  it('change state onChange', () => {
+    component.find('input').simulate('change', { target: { name: 'search', value: 'bean' } });
+    expect(component.state().search).toEqual('bean');
+  });
 });

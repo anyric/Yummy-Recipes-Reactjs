@@ -1,10 +1,13 @@
+/**
+ * Module for resetting user password
+ */
 import React, { Component } from 'react';
-
+import { notify } from 'react-notify-toast';
 import { axiosInstance } from '../../controller/AxiosInstance';
 
-// const url = 'http://127.0.0.1:5000/recipe/api/v1.0/';
-
 export class ResetPassword extends Component {
+  /** ResetPassword class to display form and handle user password reset */
+
   handleSubmit(event) {
     event.preventDefault();
     const email = event.target.elements.email.value;
@@ -12,20 +15,21 @@ export class ResetPassword extends Component {
     const data = { email: email, password: password };
     if (email !== '' && password !== '') {
       axiosInstance.put('user/reset', data)
-        .then(function (res) {
-          alert(res.data.message);
+        .then(function (response) {
+          notify.show(response.data.message, 'success', 4000);
         })
         .catch(function (error) {
           if (error.response) {
-            alert(error.response.data.message);
+            notify.show(error.response.data.message, 'error', 4000);
           }
         });
     } else {
-      alert('Please fill in all fields!');
+      notify.show('Please fill in all fields', 'error', 4000);
     }
     event.target.elements.email.value = '';
     event.target.elements.password.value = '';
   }
+
   render() {
     return (
       <div className="container-fluid dborder mt-5 col-sm-9 offset-sm-3 col-md-8 offset-md-2 pt-3">
@@ -34,7 +38,7 @@ export class ResetPassword extends Component {
             <div className="col-xs-7">
               <h2>Reset Password</h2>
               <hr />
-              <p>Please fill in form details below to reset your password!.</p>
+              <p>Please fill in form details below to reset your password!</p>
             </div>
             <div className="form-group col-xs-7">
               <label htmlFor="email">Email:</label>

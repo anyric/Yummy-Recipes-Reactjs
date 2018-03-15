@@ -1,8 +1,13 @@
+/**
+ * Module for welcome dashboard message
+ */
 import React, { Component } from 'react';
 
 import '../../static/css/style.css';
 
 export class DashboardWelcome extends Component {
+/** DashboardWelcome class handles display of welcome message  */
+
   render() {
     return (
       <div className="container-fluid dborder mt-5 col-sm-9 offset-sm-3 col-md-8 offset-md-2 pt-3">

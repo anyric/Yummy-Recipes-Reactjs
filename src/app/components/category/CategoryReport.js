@@ -1,4 +1,8 @@
+/**
+ * Module for generating and viewing category list of a user
+ */
 import React, { Component } from 'react';
+import { notify } from 'react-notify-toast';
 
 import { Pagination } from 'react-bootstrap';
 
@@ -6,10 +10,12 @@ import { axiosInstance } from '../../controller/AxiosInstance';
 import * as Category from '../../controller/Category';
 
 export class CategoryReport extends Component {
+  /** CategoryReport class to handle report generation and display */
+
   constructor(props) {
     super(props);
     this.state = {
-      categorylist: [],
+      categoryList: [],
       search: '',
       totalItems: 1,
       currentPageNumber: 1,
@@ -17,6 +23,7 @@ export class CategoryReport extends Component {
       message: '',
     };
   }
+
   getCategory(pageNumber) {
     const self = this;
     let pageURL = '';
@@ -26,33 +33,67 @@ export class CategoryReport extends Component {
       pageURL = 'category/';
     }
     axiosInstance.get(pageURL)
-      .then(function (res) {
+      .then(function (response) {
         self.setState({
-          categorylist: res.data.category.results,
-          totalItems: res.data.category.items,
-          currentPageNumber: res.data.category.page,
-          totalPages: res.data.category.pages,
+          categoryList: response.data.category.results,
+          totalItems: response.data.category.items,
+          currentPageNumber: response.data.category.page,
+          totalPages: Math.ceil(response.data.category.items / 5),
         });
       })
       .catch(function (error) {
         const data = { items: 0, page: 0, pages: 0 };
         self.setState({
-          categorylist: [],
+          categoryList: [],
           totalItems: data.items,
           currentPageNumber: data.page,
           totalPages: data.pages,
           message: error.response.data.message,
         });
+        notify.show(error.response.data.message, 'error', 4000);
       });
   }
+  searchCategoryByName(nameValue) {
+    const self = this;
+    if (typeof nameValue === 'string' && nameValue !== '') {
+      axiosInstance.get(`category/?q=${nameValue}`)
+        .then(function (response) {
+          self.setState({
+            categoryList: response.data.category.results,
+            totalItems: response.data.category.items,
+            currentPageNumber: response.data.category.page,
+            totalPages: response.data.category.pages,
+          });
+        })
+        .catch(function (error) {
+          const data = { items: 0, page: 0, pages: 0 };
+          self.setState({
+            categoryList: [],
+            totalItems: data.items,
+            currentPageNumber: data.page,
+            totalPages: data.pages,
+            message: error.response.data.message,
+          });
+          notify.show(error.response.data.message, 'error', 4000);
+        });
+    } else {
+      this.getCategory(1);
+    }
+  }
+
   componentDidMount() {
     this.getCategory(1);
   }
+
   handleSearchInput(event) {
-    event.preventDefault();
     const value = event.target.value;
     this.setState({ search: value });
+    this.searchCategoryByName(value);
+    if (value === '') {
+      this.setState({ message: '' });
+    }
   }
+
   handleRemoveCategory(index, id) {
     if (id > 0) {
       Category.deleteCategory(id);
@@ -60,21 +101,29 @@ export class CategoryReport extends Component {
     const deletedCategory = this.state.categorylist.filter(function (e, i) {
       return i !== index;
     });
-    this.setState({ categorylist: deletedCategory });
+    this.setState({ categoryList: deletedCategory });
   }
+
   handleSearch() {
     this.setState({ search: '' });
   }
+
+  handleCategoryUpdate() {
+    this.setState({
+      message: '',
+    });
+    this.handleSearch();
+    this.getCategory(1);
+  }
+
   handlePageSelect(number) {
     this.setState({ currentPageNumber: number });
     this.getCategory(number);
   }
+
   render() {
-    const filteredCategoryList = this.state.categorylist ? (this.state.categorylist.filter(
-      (category) => {
-        return category.name.indexOf(this.state.search.toLowerCase()) !== -1;
-      })) : this.state.categorylist;
     const items = [];
+
     if (this.state.totalPages) {
       items.push(
         <Pagination.First
@@ -89,6 +138,7 @@ export class CategoryReport extends Component {
           (this.state.currentPageNumber - 1) > 1 ? this.state.currentPageNumber - 1 : 1)}
         />,
       );
+
       for (let i = 1; i <= this.state.totalPages; i++) {
         items.push(
           <Pagination.Item
@@ -114,46 +164,40 @@ export class CategoryReport extends Component {
         />,
       );
     }
+
     return (
       <div className="container-fluid dborder mt-5 col-sm-9 offset-sm-3 col-md-8 offset-md-2 pt-3">
-        {this.state.categorylist.length > 0 ?
-          <div>
-            <h2>Category List</h2>
-            <hr />
-            <div>
-              <form>
-                <div className="input-group col-md-8">
-                  <input
-                    type="text"
-                    className="col-sm-12 py-2"
-                    value={this.state.search}
-                    onChange={this.handleSearchInput.bind(this)}
-                    placeholder="category name"
-                  />
-                  <div
-                    className="input-group-addon"
-                    role="button"
-                    onClick={this.handleSearch.bind(this)}
-                    tabIndex={0}
-                  >
-                    <span className="glyphicon glyphicon-search"></span>
-                  </div>
-                </div>
-              </form>
+        <h2>Category List</h2>
+        <div>
+          <form>
+            <div className="input-group col-md-8">
+              <input
+                type="text"
+                className="col-sm-12 py-2"
+                value={this.state.search}
+                onChange={this.handleSearchInput.bind(this)}
+                placeholder="category name"
+              />
+              <div
+                className="input-group-addon"
+                role="button"
+                onClick={this.handleSearch.bind(this)}
+                tabIndex={0}
+              >
+                <span className="glyphicon glyphicon-search"></span>
+              </div>
             </div>
-            <br /><br />
+          </form>
+        </div>
+        <hr />
+        { this.state.message ? this.state.message : ''}
+        {this.state.categoryList.length > 0 ?
+          <div>
             <p>Click on a category item for more details.</p>
             <div>
               <ul className="list-group">
-                {filteredCategoryList.map((category, index) =>
+                {this.state.categoryList.map((category, index) =>
                   <li className="list-group-item" key={index}>
-                    <small>
-                      <span
-                        className=" label label-info report"
-                      >
-                        {category.id}
-                      </span>
-                    </small>
                     <a className="text-info" data-toggle="collapse" href={`#cat${category.id}`}>
                       {category.name}
                       <span className="caret"></span>
@@ -195,6 +239,22 @@ export class CategoryReport extends Component {
                         <div className="modal-content">
                           <div className="modal-header">
                             <h3 className="modal-title" id="editcate">Edit Category</h3>
+                            {
+                              this.state.message ?
+                                <div
+                                  className="alert alert-danger"
+                                >
+                                  {this.state.message}
+                                  <button
+                                    type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                  >
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div> : ''
+                            }
                             <button
                               type="button"
                               className="close"
@@ -213,35 +273,37 @@ export class CategoryReport extends Component {
                               <input
                                 type="hidden"
                                 className="form-control"
-                                name="catid"
+                                name="categoryId"
                                 defaultValue={category.id}
                               />
-                              <label htmlFor="name">Name:</label>
+                              <label htmlFor="categoryName">Name:</label>
                               <input
                                 type="text"
                                 className="form-control"
-                                name="catname"
+                                name="categoryName"
                                 defaultValue={category.name}
                               />
                               <label htmlFor="description">Description:</label>
                               <textarea
                                 className="form-control"
                                 row="5"
-                                name="catdesc"
+                                name="description"
                                 defaultValue={category.description}
                               >
                               </textarea>
                             </div>
                             <div className="modal-footer">
-                              <button
-                                type="submit"
-                                className="btn btn-primary"
-                              >
+                              <button type="submit" className="btn btn-primary">
                                 <span className="glyphicon glyphicon-floppy-save">
                                   Update
                                 </span>
                               </button>
-                              <button type="submit" className="btn btn-danger" data-dismiss="modal">
+                              <button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={this.handleCategoryUpdate.bind(this)}
+                                data-dismiss="modal"
+                              >
                                 <span className="glyphicon glyphicon-remove">    Close     </span>
                               </button>
                             </div>
@@ -251,7 +313,7 @@ export class CategoryReport extends Component {
                     </div>
                   </li>)}
                 <nav aria-label="Page navigation">
-                  <h4>Total Category:
+                  <h4>Total:
                     <span className="badge">
                       { this.state.totalItems ? this.state.totalItems : 0}
                     </span>
@@ -262,7 +324,15 @@ export class CategoryReport extends Component {
                 </nav>
               </ul>
             </div>
-          </div> : <p className="text-center">{this.state.message} Please add your category.</p>}
+          </div> :
+          <p className="text-center">
+            <button
+              type="button"
+              className="glyphicon glyphicon-backward btn btn-primary"
+              onClick={this.handleCategoryUpdate.bind(this)}
+            >  Back
+            </button>
+          </p>}
       </div>
     );
   }
