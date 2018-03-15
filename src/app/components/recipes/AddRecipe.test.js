@@ -8,14 +8,16 @@ describe('AddRecipe component', () => {
   it('renders without crashing', () => {
     shallow(<AddRecipe />);
   });
-  it('returns one component', () => {
-    expect(component).toHaveLength(1);
+  it('changes state onChange', () => {
+    component.find('input').simulate('change', { target: { name: 'recname', value: 'meat' } });
+    expect(component.state().recname).toEqual('meat');
   });
-  it('renders properly', () => {
-    expect(component).toMatchSnapshot();
+  it('change state onChange', () => {
+    component.find('select').simulate('change', { target: { name: 'catid', value: 'beef' } });
+    expect(component.state().catid).toEqual('beef');
   });
-  it('renders divs', () => {
-    expect(component.find('div').length).toBe(7);
+  it('change state onChange', () => {
+    component.find('textarea').simulate('change', { target: { name: 'recdesc', value: 'bean' } });
+    expect(component.state().recdesc).toEqual('bean');
   });
 });
-

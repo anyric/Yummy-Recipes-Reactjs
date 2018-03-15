@@ -148,7 +148,6 @@ export class RecipeReport extends Component {
   }
 
   handleSearchInput(event) {
-    event.preventDefault();
     const value = event.target.value;
     this.getRecipes(null);
     this.setState({ search: value });
@@ -303,6 +302,7 @@ export class RecipeReport extends Component {
                     </span>
                   </a>
                   <a
+                    id="recipeedit"
                     href="#edit"
                     className="text-primary"
                     data-target={`#edit${recipe.id}`}

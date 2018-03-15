@@ -86,7 +86,6 @@ export class CategoryReport extends Component {
   }
 
   handleSearchInput(event) {
-    event.preventDefault();
     const value = event.target.value;
     this.setState({ search: value });
     this.searchCategoryByName(value);

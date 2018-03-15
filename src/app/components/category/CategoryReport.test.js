@@ -4,11 +4,15 @@ import { shallow } from 'enzyme';
 import { CategoryReport } from './CategoryReport';
 
 describe('<CategoryReport />', () => {
+  const component = shallow(<CategoryReport name="categoryreport" />);
   it('renders without crashing', () => {
     shallow(<CategoryReport />);
   });
   it('<CategoryReport />', () => {
-    const component = shallow(<CategoryReport name="categoryreport" />);
     expect(component).toHaveLength(1);
+  });
+  it('change state onChange', () => {
+    component.find('input').simulate('change', { target: { name: 'search', value: 'bean' } });
+    expect(component.state().search).toEqual('bean');
   });
 });
