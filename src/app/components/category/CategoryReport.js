@@ -173,6 +173,8 @@ export class CategoryReport extends Component {
             <div className="input-group col-md-8">
               <input
                 type="text"
+                id="search"
+                name="search"
                 className="col-sm-12 py-2"
                 value={this.state.search}
                 onChange={this.handleSearchInput.bind(this)}

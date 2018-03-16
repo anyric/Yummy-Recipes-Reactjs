@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import Notifications from 'react-notify-toast';
 import logo from '../../static/img/logo.jpg';
 import * as User from '../../controller/User';
 import '../../static/css/style.css';
@@ -65,6 +65,7 @@ export class Signup extends Component {
                       Sign up to get started with Yummy Recipes
                     </p>
                     <div className="mt-4">
+                      <Notifications />
                       <form onSubmit={User.registerUser.bind(this)}>
                         <div className="form-group">
                           <input

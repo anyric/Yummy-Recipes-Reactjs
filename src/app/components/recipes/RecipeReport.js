@@ -243,7 +243,8 @@ export class RecipeReport extends Component {
         <div>
           <select
             className="form-control col-md-8 mb-3"
-            name="catid"
+            name="categoryId"
+            id="categoryId"
             onChange={this.handleCategorySelect.bind(this)}
           >
             <option value={0}>All Category</option>
@@ -261,6 +262,7 @@ export class RecipeReport extends Component {
                 type="text"
                 className="col-sm-12 py-2"
                 name="search"
+                id="search"
                 value={this.state.search}
                 onChange={this.handleSearchInput.bind(this)}
                 placeholder="Recipe Name"
@@ -347,6 +349,7 @@ export class RecipeReport extends Component {
                               type="hidden"
                               className="form-control"
                               name="recipeId"
+                              id="recipeId"
                               defaultValue={recipe.id}
                             />
                             <label htmlFor="recipeName">Name:</label>
@@ -354,6 +357,7 @@ export class RecipeReport extends Component {
                               type="text"
                               className="form-control"
                               name="recipeName"
+                              id="recipeName"
                               defaultValue={recipe.name}
                             />
                             <label htmlFor="ingredients">Ingredients:</label>
@@ -361,6 +365,7 @@ export class RecipeReport extends Component {
                               className="form-control"
                               row="5"
                               name="ingredients"
+                              id="ingredients"
                               defaultValue={recipe.ingredients}
                             >
                             </textarea>

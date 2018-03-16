@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 
 import logo from '../../static/img/logo.jpg';
 import pic1 from '../../static/img/head.jpg';
@@ -12,7 +13,16 @@ import * as User from '../../controller/User';
 
 export class Login extends Component {
   /** Login class to display login form and handle user authetication */
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: localStorage.getItem('message'),
+    };
+  }
+  handleMessageReset(event) {
+    event.preventDefault();
+    this.setState({ message: '' });
+  }
   render() {
     return (
       <div>
@@ -59,6 +69,22 @@ export class Login extends Component {
               <div className="col-md-6 col-sm-8 mx-auto">
                 <div className="card border-none lmargin">
                   <div className="card-body">
+                    <div>
+                      {this.state.message ?
+                        <div
+                          className="alert alert-success col-sm-12 text-center"
+                        >
+                          {this.state.message}
+                          <button
+                            type="button"
+                            className="close"
+                            aria-label="Close"
+                            onClick={this.handleMessageReset.bind(this)}
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div> : ''}
+                    </div>
                     <div className="mt-2">
                       <img
                         src={pic1}
@@ -70,6 +96,7 @@ export class Login extends Component {
                         Login to access your account
                     </p>
                     <div className="mt-4">
+                      <Notifications />
                       <form onSubmit={User.loginUser.bind(this)}>
                         <div className="form-group">
                           <input

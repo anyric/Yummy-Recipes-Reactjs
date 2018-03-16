@@ -56,7 +56,7 @@ export class AddRecipe extends Component {
               <label htmlFor="sel1">Select Category:</label>
               <select
                 className="form-control"
-                name="catid"
+                name="categoryId"
                 onChange={this.handleInputChange.bind(this)}
               >
                 {this.state.categorylist.length > 0 ?
@@ -72,7 +72,7 @@ export class AddRecipe extends Component {
                 type="text"
                 className="form-control"
                 id="fullname"
-                name="recname"
+                name="recipeName"
                 placeholder="Enter Name"
                 onChange={this.handleInputChange.bind(this)}
               />
@@ -83,7 +83,7 @@ export class AddRecipe extends Component {
                 className="form-control"
                 row="5"
                 id="ingredient"
-                name="recdesc"
+                name="ingredients"
                 placeholder="Enter Ingredients"
                 onChange={this.handleInputChange.bind(this)}
               >

@@ -36,5 +36,7 @@ module.exports = {
         "no-console":0,
         "react/sort-comp":0,
         "no-lonely-if":0,
+        "react/no-string-refs":0,
+        "arrow-parens":0,
     }
 };
