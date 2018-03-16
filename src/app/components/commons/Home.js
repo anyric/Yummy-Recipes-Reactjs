@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import Notifications from 'react-notify-toast';
 
 import { Footer } from './Footer';
 
@@ -21,6 +22,7 @@ export class Home extends Component {
     return (
       <div>
         <header className="w3-bar">
+          <Notifications />
           <div id="top"></div>
           <div id="pic" className="carousel slide p-0" data-ride="carousel">
             <div className="carousel-caption caption-button">

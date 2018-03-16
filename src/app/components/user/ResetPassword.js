@@ -8,14 +8,26 @@ import { axiosInstance } from '../../controller/AxiosInstance';
 export class ResetPassword extends Component {
   /** ResetPassword class to display form and handle user password reset */
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      message: '',
+    };
+  }
   handleSubmit(event) {
     event.preventDefault();
-    const email = event.target.elements.email.value;
-    const password = event.target.elements.password.value;
-    const data = { email: email, password: password };
-    if (email !== '' && password !== '') {
+    const data = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    if (this.state.email !== '' && this.state.password !== '') {
+      const self = this;
       axiosInstance.put('user/reset', data)
         .then(function (response) {
+          self.setState({ message: '' });
           notify.show(response.data.message, 'success', 4000);
         })
         .catch(function (error) {
@@ -24,16 +36,16 @@ export class ResetPassword extends Component {
           }
         });
     } else {
-      notify.show('Please fill in all fields', 'error', 4000);
+      this.setState({ message: 'Please fill in all fields' });
     }
-    event.target.elements.email.value = '';
-    event.target.elements.password.value = '';
+    this.setState({ email: '', password: '' });
   }
 
   render() {
     return (
       <div className="container-fluid dborder mt-5 col-sm-9 offset-sm-3 col-md-8 offset-md-2 pt-3">
-        <form onSubmit={this.handleSubmit}>
+        {this.state.message ? <div className="alert alert-danger">{this.state.message}</div> : ''}
+        <form name="resetForm" onSubmit={this.handleSubmit.bind(this)}>
           <div className="container">
             <div className="col-xs-7">
               <h2>Reset Password</h2>
@@ -43,20 +55,26 @@ export class ResetPassword extends Component {
             <div className="form-group col-xs-7">
               <label htmlFor="email">Email:</label>
               <input
+                ref="email"
                 type="email"
                 className="form-control"
                 id="email"
                 name="email"
+                value={this.state.email}
+                onChange={event => this.setState({ email: event.target.value })}
                 placeholder="Enter Email"
               />
             </div>
             <div className="form-group col-xs-7">
-              <label htmlFor="pwd">Password:</label>
+              <label htmlFor="password">Password:</label>
               <input
+                ref="password"
                 type="password"
                 className="form-control"
-                id="pwd"
+                id="password"
                 name="password"
+                value={this.state.password}
+                onChange={event => this.setState({ password: event.target.value })}
                 placeholder="Enter Password"
               />
             </div>

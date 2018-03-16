@@ -26,6 +26,8 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
+    "sinon": "^4.4.6",
+    "sinon-as-promised": "^4.0.3",
     "superagent": "^3.8.2"
   },
   "scripts": {

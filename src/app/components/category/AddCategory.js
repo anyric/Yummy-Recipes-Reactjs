@@ -32,7 +32,7 @@ export class AddCategory extends Component {
                 type="text"
                 className="form-control"
                 id="fullname"
-                name="catname"
+                name="categoryName"
                 placeholder="Enter Name"
                 onChange={this.handleInputChange.bind(this)}
               />
@@ -43,7 +43,7 @@ export class AddCategory extends Component {
                 className="form-control"
                 row="5"
                 id="description"
-                name="catdesc"
+                name="description"
                 placeholder="Enter Description"
                 onChange={this.handleInputChange.bind(this)}
               >

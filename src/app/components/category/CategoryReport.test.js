@@ -11,8 +11,9 @@ describe('<CategoryReport />', () => {
   it('<CategoryReport />', () => {
     expect(component).toHaveLength(1);
   });
-  it('change state onChange', () => {
-    component.find('input').simulate('change', { target: { name: 'search', value: 'bean' } });
+  it('change state search', () => {
+    component.find('#search').simulate('change', { target: { name: 'search', value: 'bean' } });
     expect(component.state().search).toEqual('bean');
   });
 });
+
