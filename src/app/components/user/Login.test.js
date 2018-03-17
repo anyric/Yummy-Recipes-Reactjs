@@ -8,7 +8,8 @@ describe('<Login />', () => {
     shallow(<Login />);
   });
   it('<Login />', () => {
-    const component = shallow(<Login name="login" />);
+    const notify = jest.fn();
+    const component = shallow(<Login name="login" {...notify} />);
     expect(component).toHaveLength(1);
   });
 });

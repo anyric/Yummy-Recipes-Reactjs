@@ -57,7 +57,7 @@ export class RecipeReport extends Component {
             self.setState({
               recipeList: response.data.recipe.results,
               totalItems: response.data.recipe.items,
-              currentPageNumber: response.data.recipe.page,
+              currentPageNumber: 1,
               totalPages: response.data.recipe.pages,
             });
           }
@@ -87,8 +87,8 @@ export class RecipeReport extends Component {
             self.setState({
               recipeList: response.data,
               totalItems: response.data.length,
-              currentPageNumber: response.data.length,
-              totalPages: response.data.length,
+              currentPageNumber: 1,
+              totalPages: Math.ceil(response.data.length / 5),
             });
           }
         })
@@ -110,17 +110,17 @@ export class RecipeReport extends Component {
     }
   }
 
-  searchRecipesName(nameValue) {
+  searchRecipesByName(nameValue) {
     const self = this;
     if (typeof nameValue === 'string' && nameValue !== '') {
       axiosInstance.get(`category/recipes/?q=${nameValue}`)
         .then(function (response) {
           if (response) {
             self.setState({
-              recipeList: response.data,
-              totalItems: response.data.length,
-              currentPageNumber: response.data.length,
-              totalPages: response.data.length,
+              recipeList: response.data.recipe.results,
+              totalItems: response.data.recipe.items,
+              currentPageNumber: 1,
+              totalPages: response.data.recipe.pages,
             });
           }
         })
@@ -149,9 +149,8 @@ export class RecipeReport extends Component {
 
   handleSearchInput(event) {
     const value = event.target.value;
-    this.getRecipes(null);
     this.setState({ search: value });
-    this.searchRecipesName(value);
+    this.searchRecipesByName(value);
     if (value === '') {
       this.setState({ message: '' });
     }
@@ -161,10 +160,8 @@ export class RecipeReport extends Component {
     if (id > 0) {
       Recipes.deleteRecipe(id);
     }
-    const deletedRecipe = this.state.recipelist.filter(function (e, i) {
-      return i !== index;
-    });
-    this.setState({ recipeList: deletedRecipe });
+    this.getCategory();
+    this.getRecipes(1, 0);
   }
 
   handleSearch() {
@@ -185,6 +182,7 @@ export class RecipeReport extends Component {
     const name = target.name;
     this.setState({
       [name]: value,
+      currentPageNumber: value,
     });
     this.getRecipesByCategory(value);
   }
@@ -279,7 +277,7 @@ export class RecipeReport extends Component {
           </form>
         </div>
         <hr />
-        { this.state.message ? this.state.message : ''}
+        { this.state.recipeList.length < 1 ? this.state.message : ''}
         {this.state.recipeList.length > 0 ?
           <div>
             {this.state.recipeList ?

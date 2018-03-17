@@ -49,17 +49,17 @@ export class Home extends Component {
               <div className="item active">
                 <img src={pic1} alt="Break Fast Menu" />
                 <div className="carousel-caption caption-center">
-                  <h1 className="text-info home-font">Break Fast!</h1>
-                  <h3 className="text-primary caption-font">
+                  <h1 className="text-primary home-font">Break Fast!</h1>
+                  <h3 className="text-white caption-font">
                     Start your day off with a delicious break fast menu.
                   </h3>
                 </div>
               </div>
               <div className="item">
                 <img src={pic2} alt="Lunch Menu" />
-                <div className="carousel-caption caption-center">
-                  <h1 className="text-info home-font">Lunch!</h1>
-                  <h3 className="text-primary caption-font">
+                <div className="carousel-caption caption-center2">
+                  <h1 className="text-primary home-font">Lunch!</h1>
+                  <h3 className="text-white caption-font">
                     Planning for your Lunch?, it just got better with
                     this higly Proteinous shiny fish.
                   </h3>
@@ -67,8 +67,8 @@ export class Home extends Component {
               </div>
               <div className="item">
                 <img src={pic4} alt="Supper Menu" />
-                <div className="carousel-caption caption-center">
-                  <h1 className="text-info home-font">Supper!</h1>
+                <div className="carousel-caption caption-center2 text-center">
+                  <h1 className="text-primary home-font text-center">Supper!</h1>
                   <h3 className="text-white caption-font">
                     Still filling full after a heavy lunch, worry no more! just grab
                     some tasty chips and a vegetable burgar for a wonderful night long

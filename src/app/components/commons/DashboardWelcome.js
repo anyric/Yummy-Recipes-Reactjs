@@ -16,7 +16,7 @@ export class DashboardWelcome extends Component {
         </h3>
         <div className="container text-center col-sm-8 pt-5 text-info pl-5 ml-5">
           <p>Welcome! to the dashboard for your owesome yummy recipes.</p>
-          <p>To get started, select an item from the overview list.</p>
+          <p>To get started, select an item from the menu list.</p>
         </div>
 
       </div>
