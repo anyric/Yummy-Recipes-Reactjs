@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/anyric/Yummy-Recipes-Reactjs.svg?branch=master)](https://travis-ci.org/anyric/Yummy-Recipes-Reactjs) [![Coverage Status](https://coveralls.io/repos/github/anyric/Yummy-Recipes-Reactjs/badge.svg?branch=master)](https://coveralls.io/github/anyric/Yummy-Recipes-Reactjs?branch=master&service=github) 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8844f8f9fb93478d96c4eeec2dbf9512)](https://www.codacy.com/app/anyric/Yummy-Recipes-Api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=anyric/Yummy-Recipes-Api&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8844f8f9fb93478d96c4eeec2dbf9512)](https://www.codacy.com/app/anyric/Yummy-Recipes-Api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=anyric/Yummy-Recipes-Api&amp;utm_campaign=Badge_Grade) [![Maintainability](https://api.codeclimate.com/v1/badges/e442408c649939804c30/maintainability)](https://codeclimate.com/github/anyric/Yummy-Recipes-Reactjs/maintainability)
 # Yummy-Recipes-Reactjs
 Yummy Recipes is an application that allow users to keep track of their owesome food recipes. It helps individuals who love to cook and eat good food to remember recipes and also share with others.
 * Screenshots
