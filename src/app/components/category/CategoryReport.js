@@ -98,10 +98,7 @@ export class CategoryReport extends Component {
     if (id > 0) {
       Category.deleteCategory(id);
     }
-    const deletedCategory = this.state.categorylist.filter(function (e, i) {
-      return i !== index;
-    });
-    this.setState({ categoryList: deletedCategory });
+    this.getCategory(1);
   }
 
   handleSearch() {
@@ -192,7 +189,7 @@ export class CategoryReport extends Component {
           </form>
         </div>
         <hr />
-        { this.state.message ? this.state.message : ''}
+        { this.state.categoryList.length < 1 ? this.state.message : ''}
         {this.state.categoryList.length > 0 ?
           <div>
             <p>Click on a category item for more details.</p>

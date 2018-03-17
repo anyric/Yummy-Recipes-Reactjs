@@ -17,7 +17,6 @@ export function registerUser(event) {
       .then(function (response) {
         localStorage.setItem('message', response.data.message);
         window.location.assign('/login');
-        notify.show(response.data.message, 'success', 4000);
       })
       .catch(function (error) {
         if (error.response) {
@@ -78,7 +77,6 @@ export function logoutUser() {
       window.localStorage.clear();
       localStorage.setItem('message', response.data.message);
       window.location.assign('/login');
-      notify.show(response.data.message, 'success', 4000);
     })
     .catch(function (error) {
       if (error.response) {

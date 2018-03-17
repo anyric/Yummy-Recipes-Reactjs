@@ -4,9 +4,22 @@
     overflow-x: hidden;
     height: 1080;
     }
+    .cases {
+        text-transform: capitalize;
+    }
     .caption-center {
         margin-bottom: 300px;
-
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        width: 600px;
+        margin-left: 160px;
+    }
+    .caption-center2 {
+        margin-bottom: 420px;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 5px;
+        width: 600px;
+        margin-left: 160px;
     }
     .caption-font {
         font-family: 'PT Sans Narrow', sans-serif;
@@ -32,7 +45,7 @@
 
     }
     .feature {
-        border-radius: 60px;
+        border-radius: 5px;
         width: 400px;
         height: 350px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
