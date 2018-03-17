@@ -61,11 +61,11 @@ export function loginUser(event) {
       })
       .catch(function (error) {
         if (error.response) {
-          notify.show(error.response.data.message, 'error', 4000);
+          localStorage.setItem('message', error.response.data.message);
         }
       });
   } else {
-    notify.show('Please fill in all fields!', 'error', 4000);
+    localStorage.setItem('message', 'Please fill in all fields!');
   }
   event.target.elements.username.value = '';
   event.target.elements.password.value = '';
@@ -80,7 +80,7 @@ export function logoutUser() {
     })
     .catch(function (error) {
       if (error.response) {
-        notify.show(error.response.data.message, 'error', 4000);
+        localStorage.setItem('message', error.response.data.message);
       }
     });
 }
@@ -89,12 +89,11 @@ export function deleteUser() {
   axiosInstance.delete('user/delete')
     .then(function (response) {
       localStorage.clear();
-      notify.show(response.data.message, 'success', 4000);
+      localStorage.setItem('message', response.data.message);
     })
     .catch(function (error) {
       if (error.response) {
-        localStorage.clear();
-        notify.show(error.response.data.message, 'error', 4000);
+        localStorage.setItem('message', error.response.data.message);
       }
     });
 }
