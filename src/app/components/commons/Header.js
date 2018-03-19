@@ -107,13 +107,13 @@ export class Header extends Component {
                         </NavLink>
                       </li>
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/resetpassword">
+                        <NavLink className="nav-link text-info" to="/reset-password">
                           <span><i className="glyphicon glyphicon-pencil"></i> Change password
                           </span>
                         </NavLink>
                       </li>
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/deleteaccount">
+                        <NavLink className="nav-link text-info" to="/delete-account">
                           <span>
                             <i className="glyphicon glyphicon-trash text-danger"></i> Delete Account
                           </span>
@@ -127,14 +127,14 @@ export class Header extends Component {
                   <div id="cat" className="panel-collapse">
                     <ul className="list-group">
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/addnewcategory">
+                        <NavLink className="nav-link text-info" to="/add-new-category">
                           <span><i className="glyphicon glyphicon-plus"></i> New Category </span>
                         </NavLink>
                       </li>
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          to="/categoryreport"
+                          to="/category-report"
                         >
                           <span> <i className="glyphicon glyphicon-folder-open"></i> View Reports
                           </span>
@@ -149,14 +149,14 @@ export class Header extends Component {
                   <div id="recipe" className="panel-collapse">
                     <ul className="list-group">
                       <li className="list-group-item">
-                        <NavLink className="nav-link text-info" to="/addnewrecipe">
+                        <NavLink className="nav-link text-info" to="/add-new-recipe">
                           <span><i className="glyphicon glyphicon-plus"></i> New Recipe </span>
                         </NavLink>
                       </li>
                       <li className="list-group-item">
                         <NavLink
                           className="nav-link text-info"
-                          to="/recipereport"
+                          to="/recipe-report"
                         >
                           <span><i className="glyphicon glyphicon-folder-open"></i> View Reports
                           </span>
@@ -170,12 +170,12 @@ export class Header extends Component {
             <Switch>
               <Route path="/welcome" component={DashboardWelcome} />
               <Route path="/profile" component={UserProfile} />
-              <Route path="/resetpassword" component={ResetPassword} />
-              <Route path="/deleteaccount" component={DeleteAccount} />
-              <Route path="/addnewcategory" component={AddCategory} />
-              <Route path="/categoryreport" component={CategoryReport} />
-              <Route path="/addnewrecipe" component={AddRecipe} />
-              <Route path="/recipereport" component={RecipeReport} />
+              <Route path="/reset-password" component={ResetPassword} />
+              <Route path="/delete-account" component={DeleteAccount} />
+              <Route path="/add-new-category" component={AddCategory} />
+              <Route path="/category-report" component={CategoryReport} />
+              <Route path="/add-new-recipe" component={AddRecipe} />
+              <Route path="/recipe-report" component={RecipeReport} />
             </Switch>
           </div>
           <Footer />

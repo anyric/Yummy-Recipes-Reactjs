@@ -16,12 +16,12 @@ export class App extends Component {
           <Route path="/login" component={Login} />
           <Route exact path="/welcome" component={Dashboard} />
           <Route exact path="/profile" component={Dashboard} />
-          <Route exact path="/resetpassword" component={Dashboard} />
-          <Route exact path="/deleteaccount" component={Dashboard} />
-          <Route exact path="/addnewcategory" component={Dashboard} />
-          <Route exact path="/categoryreport" component={Dashboard} />
-          <Route exact path="/addnewrecipe" component={Dashboard} />
-          <Route exact path="/recipereport" component={Dashboard} />
+          <Route exact path="/reset-password" component={Dashboard} />
+          <Route exact path="/delete-account" component={Dashboard} />
+          <Route exact path="/add-new-category" component={Dashboard} />
+          <Route exact path="/category-report" component={Dashboard} />
+          <Route exact path="/add-new-recipe" component={Dashboard} />
+          <Route exact path="/recipe-report" component={Dashboard} />
         </Switch>
       </BrowserRouter>
     );
