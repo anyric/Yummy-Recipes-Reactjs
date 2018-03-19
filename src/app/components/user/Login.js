@@ -25,7 +25,7 @@ export class Login extends Component {
       position: toast.POSITION.TOP_CENTER,
       className: css({
         background: '#28a745',
-        color: '#000000',
+        color: '#ffffff',
       }),
     });
   }
